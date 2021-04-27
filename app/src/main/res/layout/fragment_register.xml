@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginFragment">
+    tools:context=".view.RegisterFragment">
 
     <EditText
         android:id="@+id/usernameRegisterET"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/usernameRegisterET" />
 
     <EditText
-        android:id="@+id/phoeRegisterET"
+        android:id="@+id/phoneRegisterET"
         android:layout_width="296dp"
         android:layout_height="43dp"
         android:layout_marginTop="28dp"
@@ -76,12 +76,12 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordRegisterET" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerB"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:text="@string/register"
-        app:layout_constraintEnd_toEndOf="@+id/phoeRegisterET"
-        app:layout_constraintStart_toStartOf="@+id/phoeRegisterET"
-        app:layout_constraintTop_toBottomOf="@+id/phoeRegisterET" />
+        app:layout_constraintEnd_toEndOf="@+id/phoneRegisterET"
+        app:layout_constraintStart_toStartOf="@+id/phoneRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/phoneRegisterET" />
 </androidx.constraintlayout.widget.ConstraintLayout>
