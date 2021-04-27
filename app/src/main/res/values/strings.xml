@@ -1,12 +1,8 @@
 <resources>
     <string name="app_name">AdApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="allAds">ALL ADS FRAGMENT</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="myAccount">MY   ACCOUNT</string>
     <string name="myAd">My Ad</string>
     <string name="notification">Notification</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="newAd">Add a new advertisement</string>
 </resources>
