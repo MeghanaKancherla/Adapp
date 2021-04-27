@@ -12,15 +12,16 @@
         android:layout_width="296dp"
         android:layout_height="43dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="50dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/emailRegisterET"
@@ -36,13 +37,13 @@
         app:layout_constraintTop_toBottomOf="@+id/usernameRegisterET" />
 
     <EditText
-        android:id="@+id/phoeRegisterET"
+        android:id="@+id/phoneRegisterET"
         android:layout_width="296dp"
         android:layout_height="43dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/phonenumber"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="@+id/rePasswordRegisterET"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/rePasswordRegisterET"
@@ -75,12 +76,12 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordRegisterET" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerB"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:text="@string/register"
-        app:layout_constraintEnd_toEndOf="@+id/phoeRegisterET"
-        app:layout_constraintStart_toStartOf="@+id/phoeRegisterET"
-        app:layout_constraintTop_toBottomOf="@+id/phoeRegisterET" />
+        app:layout_constraintEnd_toEndOf="@+id/phoneRegisterET"
+        app:layout_constraintStart_toStartOf="@+id/phoneRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/phoneRegisterET" />
 </androidx.constraintlayout.widget.ConstraintLayout>
