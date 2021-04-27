@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,16 +10,14 @@
         android:id="@+id/usernameRegisterET"
         android:layout_width="296dp"
         android:layout_height="43dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/emailRegisterET"
@@ -75,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordRegisterET" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerButton"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -83,4 +80,18 @@
         app:layout_constraintEnd_toEndOf="@+id/phoeRegisterET"
         app:layout_constraintStart_toStartOf="@+id/phoeRegisterET"
         app:layout_constraintTop_toBottomOf="@+id/phoeRegisterET" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/Registration"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
