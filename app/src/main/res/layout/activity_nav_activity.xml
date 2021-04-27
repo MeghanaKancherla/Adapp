@@ -7,12 +7,12 @@
     tools:context=".Nav_activity">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="671dp">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="672dp"
+        tools:layout="@layout/fragment_all_ads" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

@@ -1,4 +1,4 @@
-package com.example.adapp
+package com.example.adapp.my_ads
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.adapp.R
 import com.example.adapp.dummy.DummyContent
 
 /**
  * A fragment representing a list of Items.
  */
-class AllAdsFragment : Fragment() {
+class MyAdsFragment : Fragment() {
 
     private var columnCount = 1
 
@@ -29,7 +30,7 @@ class AllAdsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_all_ads, container, false)
+        val view = inflater.inflate(R.layout.fragment_item_my_ads, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -38,7 +39,7 @@ class AllAdsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = AllAdsRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MyAdsRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
         return view
@@ -52,7 +53,7 @@ class AllAdsFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            AllAdsFragment().apply {
+            MyAdsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/nav_activity">
+
+    <activity
+        android:id="@+id/nav_activity"
+        android:name="com.example.adapp.Nav_activity"
+        android:label="activity_nav_activity"
+        tools:layout="@layout/activity_nav_activity" />
+    <fragment
+        android:id="@+id/myAdsFragment"
+        android:name="com.example.adapp.my_ads.MyAdsFragment"
+        android:label="fragment_item_my_ads"
+        tools:layout="@layout/fragment_item_my_ads" >
+        <action
+            android:id="@+id/action_myAdsFragment_to_nav_activity"
+            app:destination="@id/nav_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/newAdFragment"
+        android:name="com.example.adapp.new_ad.NewAdFragment"
+        android:label="fragment_new_ad"
+        tools:layout="@layout/fragment_new_ad" >
+        <action
+            android:id="@+id/action_newAdFragment_to_nav_activity"
+            app:destination="@id/nav_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.adapp.notification.NotificationFragment"
+        android:label="fragment_item_notification"
+        tools:layout="@layout/fragment_item_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_nav_activity"
+            app:destination="@id/nav_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.example.adapp.my_account.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" >
+        <action
+            android:id="@+id/action_myAccountFragment_to_nav_activity"
+            app:destination="@id/nav_activity" />
+    </fragment>
+</navigation>

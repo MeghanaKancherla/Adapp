@@ -1,10 +1,11 @@
-package com.example.adapp
+package com.example.adapp.my_ads
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.adapp.R
 
 import com.example.adapp.dummy.DummyContent.DummyItem
 
@@ -12,13 +13,13 @@ import com.example.adapp.dummy.DummyContent.DummyItem
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class AllAdsRecyclerViewAdapter(
+class MyAdsRecyclerViewAdapter(
     private val values: List<DummyItem>
-) : RecyclerView.Adapter<AllAdsRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MyAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_all_ads, parent, false)
+            .inflate(R.layout.fragment_my_ads, parent, false)
         return ViewHolder(view)
     }
 
