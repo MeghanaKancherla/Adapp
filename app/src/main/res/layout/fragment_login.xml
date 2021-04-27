@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.LoginFragment">
+
+    <EditText
+        android:id="@+id/usernameRegisterET"
+        android:layout_width="296dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/emailRegisterET"
+        android:layout_width="294dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/usernameRegisterET"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/usernameRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/usernameRegisterET" />
+
+    <EditText
+        android:id="@+id/phoeRegisterET"
+        android:layout_width="296dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/phonenumber"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/rePasswordRegisterET"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/rePasswordRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/rePasswordRegisterET" />
+
+    <EditText
+        android:id="@+id/passwordRegisterET"
+        android:layout_width="296dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/emailRegisterET"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/emailRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/emailRegisterET" />
+
+    <EditText
+        android:id="@+id/rePasswordRegisterET"
+        android:layout_width="296dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/cpassword"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordRegisterET"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegisterET" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="122dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/register"
+        app:layout_constraintEnd_toEndOf="@+id/phoeRegisterET"
+        app:layout_constraintStart_toStartOf="@+id/phoeRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/phoeRegisterET" />
+</androidx.constraintlayout.widget.ConstraintLayout>
