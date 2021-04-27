@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.adapp.R
-import com.example.adapp.model.User
-import com.example.adapp.presenter.RegisterPresenter
+import com.example.adapp.presenter.AuthPresenter
 import kotlinx.android.synthetic.main.fragment_register.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,11 +21,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class RegisterFragment : Fragment(), RegisterPresenter.View {
+class RegisterFragment : Fragment(), AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var regPresenter: RegisterPresenter
+    lateinit var regPresenter: AuthPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class RegisterFragment : Fragment(), RegisterPresenter.View {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        regPresenter = RegisterPresenter(this)
+        regPresenter = AuthPresenter(this)
     }
 
     override fun onCreateView(
@@ -86,10 +85,8 @@ class RegisterFragment : Fragment(), RegisterPresenter.View {
             }
 
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -113,5 +110,4 @@ class RegisterFragment : Fragment(), RegisterPresenter.View {
     override fun sendToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
-
 }

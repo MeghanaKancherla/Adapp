@@ -6,7 +6,7 @@ import com.example.adapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterPresenter(val view: View){
+class AuthPresenter(val view: View){
 
     fun createAccount(username: String, email: String, password: String, phoneNo: String) {
         val fAuth= FirebaseAuth.getInstance()
@@ -28,6 +28,31 @@ class RegisterPresenter(val view: View){
 
             }
     }
+
+    fun loginUser(userMail: String, userPassword: String) {
+        val lAuth = FirebaseAuth.getInstance()
+        lAuth.signInWithEmailAndPassword(userMail,userPassword)
+            .addOnCompleteListener() { task->
+                if(task.isSuccessful)
+                {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    if(user.isEmailVerified)
+                    {
+                        view.sendToast("Logged In successfully")
+                    }
+                    else
+                    {
+                        user.sendEmailVerification()
+                        view.sendToast("Verification mail sent..")
+                    }
+                }
+                else
+                {
+                    view.sendToast("Failed to login")
+                }
+            }
+    }
+
 
     interface View{
         fun sendToast(message: String)

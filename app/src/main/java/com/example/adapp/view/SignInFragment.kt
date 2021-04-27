@@ -1,11 +1,16 @@
 package com.example.adapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.adapp.R
+import com.example.adapp.presenter.AuthPresenter
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +22,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignInFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignInFragment : Fragment() {
+class SignInFragment : Fragment(), AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var authPresenter: AuthPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,7 @@ class SignInFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        authPresenter = AuthPresenter(this)
     }
 
     override fun onCreateView(
@@ -35,8 +42,45 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        signInButton.setOnClickListener{
+            val userMail=usernameLoginET.text.toString()
+            val userPassword=passwordLoginET.text.toString()
+            if(userMail.isNotEmpty() && userPassword.isNotEmpty())
+            {
+                val isMailValid=android.util.Patterns.EMAIL_ADDRESS.matcher(userMail).matches()
+
+                if(!isMailValid)
+                {
+                    usernameLoginET.setError("Enter a valid Email!")
+                }
+                else if(userPassword.length<8)
+                {
+                    passwordLoginET.setError("Password should have minimum 8 characters!")
+                }
+                else
+                {
+                    authPresenter.loginUser(userMail,userPassword)
+                }
+            }
+            else
+            {
+                Toast.makeText(requireActivity(),"Enter all the credentials!",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        newUser.setOnClickListener {
+            val regFrag=RegisterFragment()
+            activity!!.supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+        }
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+
 
     companion object {
         /**
@@ -56,5 +100,9 @@ class SignInFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun sendToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }
