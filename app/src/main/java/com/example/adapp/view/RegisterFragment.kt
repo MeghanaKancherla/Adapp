@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.adapp.R
 import com.example.adapp.model.User
-import com.example.adapp.presenter.RegisterPresenter
+import com.example.adapp.presenter.AuthPresenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -24,17 +24,19 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(),AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-//    val regPresenter=RegisterPresenter(requireActivity())
+    lateinit var regPresenter:AuthPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        regPresenter= AuthPresenter(this)
+
     }
 
     override fun onCreateView(
@@ -44,7 +46,6 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         registerB.setOnClickListener {
@@ -76,7 +77,21 @@ class RegisterFragment : Fragment() {
                 }
                 else
                 {
-                    createAccount(username,email,password,phoneNo)
+                    val isCreated=regPresenter.createAccount(username,email,password,phoneNo)
+                    if(isCreated)
+                    {
+                        Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
+                        val loginFrag=SignInFragment()
+                        activity!!.supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.parentL,loginFrag)
+                            .commit()
+                    }
+                    else
+                    {
+                        Toast.makeText(activity,"Registration Failed", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
             else
@@ -85,8 +100,6 @@ class RegisterFragment : Fragment() {
             }
 
         }
-
-
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -141,4 +154,10 @@ class RegisterFragment : Fragment() {
                 }
             }
     }
+
+    override fun sendToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+
 }

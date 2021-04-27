@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.adapp.R
+import com.example.adapp.presenter.AuthPresenter
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
@@ -21,17 +22,20 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignInFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignInFragment : Fragment() {
+class SignInFragment : Fragment(),AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var signinPresenter: AuthPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
+        signinPresenter=AuthPresenter(this)
     }
 
     override fun onCreateView(
@@ -61,7 +65,7 @@ class SignInFragment : Fragment() {
                 }
                 else
                 {
-                    loginUser(userMail,userPassword)
+                    signinPresenter.loginUser(userMail,userPassword)
                 }
             }
             else
@@ -102,7 +106,9 @@ class SignInFragment : Fragment() {
                 }
             }
     }
-
+    override fun sendToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -122,4 +128,6 @@ class SignInFragment : Fragment() {
                 }
             }
     }
+
+
 }
