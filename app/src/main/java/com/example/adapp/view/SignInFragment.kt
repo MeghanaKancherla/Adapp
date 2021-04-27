@@ -1,11 +1,15 @@
 package com.example.adapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.adapp.R
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +39,63 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        signInButton.setOnClickListener{
+            val userMail=usernameLoginET.text.toString()
+            val userPassword=passwordLoginET.text.toString()
+            if(userMail.isNotEmpty() && userPassword.isNotEmpty())
+            {
+                val isMailValid=android.util.Patterns.EMAIL_ADDRESS.matcher(userMail).matches()
+
+                if(!isMailValid)
+                {
+                    usernameLoginET.setError("Enter a valid Email!")
+                }
+                else if(userPassword.length<8)
+                {
+                    passwordLoginET.setError("Password should have minimum 8 characters!")
+                }
+                else
+                {
+                    loginUser(userMail,userPassword)
+                }
+            }
+            else
+            {
+                Toast.makeText(requireActivity(),"Enter all the credentials!",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        newUser.setOnClickListener {
+            val regFrag=RegisterFragment()
+            activity!!.supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+        }
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
+    }
+
+    private fun loginUser(userMail: String, userPassword: String) {
+        val lAuth=FirebaseAuth.getInstance()
+        lAuth.signInWithEmailAndPassword(userMail,userPassword)
+            .addOnCompleteListener(requireActivity())
+            {
+                    task->
+                if(task.isSuccessful)
+                {
+                    val user=FirebaseAuth.getInstance().currentUser
+                    if(user.isEmailVerified)
+                    {
+
+                    }
+                    else
+                    {
+                        user.sendEmailVerification()
+                        Toast.makeText(activity,"verification mail sent..",Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else
+                {
+                    Toast.makeText(activity,"Failed to login",Toast.LENGTH_SHORT)
+                }
+            }
     }
 
     companion object {
