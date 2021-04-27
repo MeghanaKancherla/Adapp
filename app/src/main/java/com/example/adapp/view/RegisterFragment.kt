@@ -28,7 +28,7 @@ class RegisterFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    val regPresenter=RegisterPresenter(requireActivity())
+//    val regPresenter=RegisterPresenter(requireActivity())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -76,7 +76,7 @@ class RegisterFragment : Fragment() {
                 }
                 else
                 {
-                    regPresenter.createAccount(username,email,password,phoneNo)
+                    createAccount(username,email,password,phoneNo)
                 }
             }
             else
@@ -90,7 +90,34 @@ class RegisterFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+    fun createAccount(username: String, email: String, password: String, phoneNo: String) {
+        val fAuth= FirebaseAuth.getInstance()
+        fAuth.createUserWithEmailAndPassword(email,password)
+            .addOnCompleteListener(requireActivity()){
+                    task ->
+                if(task.isSuccessful)
+                {
+                    val user=fAuth.currentUser
+                    val userObj= User(username,email,password,phoneNo)
+                    FirebaseDatabase.getInstance().getReference("Users")
+                        .child(user.uid).setValue(userObj)
+                    Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
+                    FirebaseAuth.getInstance().signOut()
+                    val signInFragment=SignInFragment()
 
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.parentL,signInFragment)
+                        .commit()
+
+                }
+                else
+                {
+                    Toast.makeText(activity,"Unable to complete Registration..", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+    }
 
 
 

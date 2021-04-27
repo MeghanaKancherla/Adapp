@@ -39,6 +39,11 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         signInButton.setOnClickListener{
             val userMail=usernameLoginET.text.toString()
             val userPassword=passwordLoginET.text.toString()
@@ -69,7 +74,7 @@ class SignInFragment : Fragment() {
             val regFrag=RegisterFragment()
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
         }
-        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun loginUser(userMail: String, userPassword: String) {
@@ -83,7 +88,7 @@ class SignInFragment : Fragment() {
                     val user=FirebaseAuth.getInstance().currentUser
                     if(user.isEmailVerified)
                     {
-
+                        Toast.makeText(activity,"Logged In succesfully",Toast.LENGTH_SHORT).show()
                     }
                     else
                     {
