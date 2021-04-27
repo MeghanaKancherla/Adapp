@@ -37,13 +37,13 @@
         app:layout_constraintTop_toBottomOf="@+id/usernameRegisterET" />
 
     <EditText
-        android:id="@+id/phoneRegisterET"
+        android:id="@+id/phoeRegisterET"
         android:layout_width="296dp"
         android:layout_height="43dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/phonenumber"
-        android:inputType="phone"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/rePasswordRegisterET"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/rePasswordRegisterET"
@@ -76,12 +76,12 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordRegisterET" />
 
     <Button
-        android:id="@+id/registerB"
+        android:id="@+id/button"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:text="@string/register"
-        app:layout_constraintEnd_toEndOf="@+id/phoneRegisterET"
-        app:layout_constraintStart_toStartOf="@+id/phoneRegisterET"
-        app:layout_constraintTop_toBottomOf="@+id/phoneRegisterET" />
+        app:layout_constraintEnd_toEndOf="@+id/phoeRegisterET"
+        app:layout_constraintStart_toStartOf="@+id/phoeRegisterET"
+        app:layout_constraintTop_toBottomOf="@+id/phoeRegisterET" />
 </androidx.constraintlayout.widget.ConstraintLayout>
