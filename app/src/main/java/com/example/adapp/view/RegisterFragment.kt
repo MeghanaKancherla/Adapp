@@ -9,9 +9,7 @@ import android.widget.Toast
 import com.example.adapp.R
 import com.example.adapp.model.User
 import com.example.adapp.presenter.RegisterPresenter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_register.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,17 +22,20 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), RegisterPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    val regPresenter=RegisterPresenter(requireActivity())
+    lateinit var regPresenter: RegisterPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        regPresenter = RegisterPresenter(this)
     }
 
     override fun onCreateView(
@@ -86,14 +87,8 @@ class RegisterFragment : Fragment() {
 
         }
 
-
-
         super.onViewCreated(view, savedInstanceState)
     }
-
-
-
-
 
     companion object {
         /**
@@ -114,4 +109,9 @@ class RegisterFragment : Fragment() {
                 }
             }
     }
+
+    override fun sendToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
 }
