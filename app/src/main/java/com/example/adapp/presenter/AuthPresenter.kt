@@ -13,9 +13,8 @@ class AuthPresenter(val view: View){
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful)
                 {
-
-                    val user=fAuth.currentUser
-                    val userObj= User(username,email,password,phoneNo)
+                    val user = fAuth.currentUser
+                    val userObj = User(username,email,password,phoneNo)
                     FirebaseDatabase.getInstance().getReference("Users")
                         .child(user.uid).setValue(userObj)
                 }
