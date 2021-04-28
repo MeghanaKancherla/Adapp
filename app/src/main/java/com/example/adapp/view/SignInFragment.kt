@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.adapp.Nav_activity
 import com.example.adapp.R
 import com.example.adapp.presenter.AuthPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -64,7 +65,11 @@ class SignInFragment : Fragment(),AuthPresenter.View {
                 }
                 else
                 {
-                    signinPresenter.loginUser(userMail,userPassword)
+                    val isSignedIn=signinPresenter.loginUser(userMail,userPassword)
+                    if(isSignedIn)
+                    {
+                        startActivity(Intent(requireContext(),Nav_activity::class.java))
+                    }
                 }
             }
             else
@@ -79,6 +84,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
         }
         super.onViewCreated(view, savedInstanceState)
     }
+
 
     companion object {
         /**
