@@ -12,4 +12,9 @@
     <string name="userLogin"> User Login</string>
 
 
+    <string name="allAds">ALL ADS FRAGMENT</string>
+    <string name="myAccount">MY   ACCOUNT</string>
+    <string name="myAd">My Ad</string>
+    <string name="notification">Notification</string>
+    <string name="newAd">Add a new advertisement</string>
 </resources>
