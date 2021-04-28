@@ -17,12 +17,14 @@ class MainActivity : AppCompatActivity() {
         val currentUser= FirebaseAuth.getInstance().currentUser
         if(currentUser==null)
         {
+
             val signInFragment=SignInFragment()
             supportFragmentManager.beginTransaction().add(R.id.parentL,signInFragment).commit()
 
         }
         else
         {
+            finish()
             val intent= Intent(this,Nav_activity::class.java)
             startActivity(intent)
 

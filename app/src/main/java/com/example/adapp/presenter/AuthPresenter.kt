@@ -54,7 +54,16 @@ class AuthPresenter(val view: View){
             }
         return flag
     }
-
+    fun updateData(changedPhoneNumber: String, changedUserName: String) {
+        val user=FirebaseAuth.getInstance().currentUser
+        val uid=user.uid
+        val databaseRef=FirebaseDatabase.getInstance()
+            .getReference("Users").child(uid)
+        databaseRef.child("username").setValue(changedUserName)
+        databaseRef.child("phoneNumber").setValue(changedPhoneNumber)
+        view.sendToast("Changes made successfully")
+        //Toast.makeText(activity,"Changes made successfully",Toast.LENGTH_SHORT).show()
+    }
 
     interface View{
         fun sendToast(message: String)

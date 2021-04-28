@@ -17,4 +17,6 @@
     <string name="newAd">Add a new advertisement</string>
     <string name="logoutbutton">logout</string>
     <string name="accountInfo">Account Information</string>
+    <string name="savechangesbutton">save</string>
+    <string name="cancelbutton">cancel</string>
 </resources>
