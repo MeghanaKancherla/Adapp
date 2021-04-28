@@ -104,37 +104,6 @@ class RegisterFragment : Fragment(),AuthPresenter.View {
 
         super.onViewCreated(view, savedInstanceState)
     }
-    fun createAccount(username: String, email: String, password: String, phoneNo: String) {
-        val fAuth= FirebaseAuth.getInstance()
-        fAuth.createUserWithEmailAndPassword(email,password)
-            .addOnCompleteListener(requireActivity()){
-                    task ->
-                if(task.isSuccessful)
-                {
-                    val user=fAuth.currentUser
-                    val userObj= User(username,email,password,phoneNo)
-                    FirebaseDatabase.getInstance().getReference("Users")
-                        .child(user.uid).setValue(userObj)
-                    Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
-                    FirebaseAuth.getInstance().signOut()
-                    val signInFragment=SignInFragment()
-
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.parentL,signInFragment)
-                        .commit()
-
-                }
-                else
-                {
-                    Toast.makeText(activity,"Unable to complete Registration..", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-    }
-
-
-
 
     companion object {
         /**

@@ -34,6 +34,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        signinPresenter = AuthPresenter(this)
     }
 
     override fun onCreateView(
