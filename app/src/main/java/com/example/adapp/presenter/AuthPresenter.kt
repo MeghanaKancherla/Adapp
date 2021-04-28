@@ -1,10 +1,5 @@
 package com.example.adapp.presenter
 
-import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import com.example.adapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
