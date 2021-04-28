@@ -16,4 +16,5 @@
     <string name="notification">Notification</string>
     <string name="newAd">Add a new advertisement</string>
     <string name="logoutbutton">logout</string>
+    <string name="accountInfo">Account Information</string>
 </resources>

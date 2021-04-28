@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class AuthPresenter(val view: View){
 
+
     fun createAccount(username: String, email: String, password: String, phoneNo: String):Boolean{
         val fAuth= FirebaseAuth.getInstance()
         var flag=true
