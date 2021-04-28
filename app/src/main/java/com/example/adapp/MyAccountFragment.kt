@@ -80,7 +80,9 @@ class MyAccountFragment : Fragment(), AccountPresenter.View {
 
     private fun print(response: Response){
         response.user?.let { user ->
-            userDetailsT.setText("${user.username}\n${user.email}")
+            accountUserNameT.setText("${user.username}")
+            accountUserEmail.setText("${user.email}")
+            accountUserPhoneT.setText("${user.phoneNumber}")
         }
     }
 
