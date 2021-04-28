@@ -1,25 +1,20 @@
 package com.example.adapp
 
-import android.content.DialogInterface
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import com.example.adapp.model.User
-import com.example.adapp.presenter.MyAcoountDataPresenter
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.adapp.model.Response
+import com.example.adapp.presenter.AuthPresenter
+import com.example.adapp.presenter.FirebaseCallback
+import com.example.adapp.presenter.MyAcountDataPresenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_my_account.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,11 +26,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MyAccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MyAccountFragment : Fragment(),MyAcoountDataPresenter.View {
+class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback,AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var myAcoountDataPresenter: MyAcoountDataPresenter
+    lateinit var myAcountDataPresenter: MyAcountDataPresenter
+    lateinit var authPresenter: AuthPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +39,10 @@ class MyAccountFragment : Fragment(),MyAcoountDataPresenter.View {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        myAcoountDataPresenter= MyAcoountDataPresenter(this)
-
+        setHasOptionsMenu(true)
+        myAcountDataPresenter= MyAcountDataPresenter(this)
+        myAcountDataPresenter.getAccountDetails(this)
+        authPresenter=AuthPresenter(this)
     }
 
     override fun onCreateView(
@@ -55,20 +53,29 @@ class MyAccountFragment : Fragment(),MyAcoountDataPresenter.View {
         return inflater.inflate(R.layout.fragment_my_account, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var data= myAcoountDataPresenter.getMyAccountData()
-        if(data!=null)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val item=menu.add("Edit Details")
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.title)
         {
-            accountUserNameT.setText("${data.username}")
-            accountUserEmail.setText("${data.email}")
-            accountUserPhoneT.setText("${data.phoneNumber}")
-            Log.d("MyAccount","$data")
+            "Edit Details"->{
+                accountUserNameET.isEnabled=true
+                accountUserPhoneET.isEnabled=true
+                cancelB.visibility=View.VISIBLE
+                submitB.visibility=View.VISIBLE
+                logoutB.visibility=View.INVISIBLE
+
+            }
         }
-        else
-        {
-            Log.d("MyAccount","$data")
-        }
+
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
         logoutB.setOnClickListener{
@@ -77,9 +84,56 @@ class MyAccountFragment : Fragment(),MyAcoountDataPresenter.View {
             startActivity(Intent(requireContext(),MainActivity::class.java))
 
         }
+        cancelB.setOnClickListener{
+            accountUserNameET.isEnabled=false
+            accountUserPhoneET.isEnabled=false
+            submitB.visibility=View.INVISIBLE
+            cancelB.visibility=View.INVISIBLE
+            logoutB.visibility=View.VISIBLE
+
+        }
+        submitB.setOnClickListener{
+            displayAlertDialog()
+            accountUserPhoneET.isEnabled=false
+            accountUserNameET.isEnabled=false
+            submitB.visibility=View.INVISIBLE
+            cancelB.visibility=View.INVISIBLE
+            logoutB.visibility=View.VISIBLE
+
+
+        }
 
         super.onViewCreated(view, savedInstanceState)
     }
+
+    private fun displayAlertDialog() {
+        var builder= androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setMessage("Are you sure you want make changes?")
+        builder.setPositiveButton("No")  {
+                dlg, i-> dlg.cancel()
+        }
+        builder.setNegativeButton("Yes") {dlg,i ->
+            val changedUserName=accountUserNameET.text.toString()
+            val changedPhoneNumber=accountUserPhoneET.text.toString()
+           if(changedUserName.isEmpty())
+           {
+               accountUserNameET.setError("Username cannot be empty!")
+           }
+            if(changedPhoneNumber.isEmpty())
+            {
+                accountUserPhoneET.setError("Phone number cannot be empty")
+
+            }
+            if(changedPhoneNumber.length!=10)
+            {
+                accountUserPhoneET.setError("Enter a valid phone number!")
+            }
+            authPresenter.updateData(changedPhoneNumber,changedUserName)
+        }
+        builder.create().show()
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -102,5 +156,16 @@ class MyAccountFragment : Fragment(),MyAcoountDataPresenter.View {
 
     override fun sendToast(message: String) {
         Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResponse(response: Response) {
+        val userDetails=response.user!!
+        accountUserEmailET.isEnabled=false
+        accountUserNameET.isEnabled=false
+        accountUserPhoneET.isEnabled=false
+        accountUserPhoneET.setText(userDetails.phoneNumber)
+        accountUserEmailET.setText(userDetails.email)
+        accountUserNameET.setText(userDetails.username)
+        accountPB.visibility=View.INVISIBLE
     }
 }
