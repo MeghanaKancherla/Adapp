@@ -76,7 +76,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
 
         newUser.setOnClickListener {
             val regFrag=RegisterFragment()
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+            activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.parentL,regFrag).commit()
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -102,7 +102,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
                 }
                 else
                 {
-                    Toast.makeText(activity,"Failed to login",Toast.LENGTH_SHORT)
+                    Toast.makeText(activity,"Invalid Credentials",Toast.LENGTH_SHORT)
                 }
             }
     }
