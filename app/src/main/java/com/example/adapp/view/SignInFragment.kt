@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.adapp.Nav_activity
 import com.example.adapp.R
 import com.example.adapp.presenter.AuthPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -65,7 +66,11 @@ class SignInFragment : Fragment(),AuthPresenter.View {
                 }
                 else
                 {
-                    signinPresenter.loginUser(userMail,userPassword)
+                    val isSignedIn=signinPresenter.loginUser(userMail,userPassword)
+                    if(isSignedIn)
+                    {
+                        startActivity(Intent(requireContext(),Nav_activity::class.java))
+                    }
                 }
             }
             else
@@ -81,31 +86,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun loginUser(userMail: String, userPassword: String) {
-        val lAuth=FirebaseAuth.getInstance()
-        lAuth.signInWithEmailAndPassword(userMail,userPassword)
-            .addOnCompleteListener(requireActivity())
-            {
-                    task->
-                if(task.isSuccessful)
-                {
-                    val user=FirebaseAuth.getInstance().currentUser
-                    if(user.isEmailVerified)
-                    {
-                        Toast.makeText(activity,"Logged In succesfully",Toast.LENGTH_SHORT).show()
-                    }
-                    else
-                    {
-                        user.sendEmailVerification()
-                        Toast.makeText(activity,"verification mail sent..",Toast.LENGTH_SHORT).show()
-                    }
-                }
-                else
-                {
-                    Toast.makeText(activity,"Invalid Credentials",Toast.LENGTH_SHORT)
-                }
-            }
-    }
+
     override fun sendToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }

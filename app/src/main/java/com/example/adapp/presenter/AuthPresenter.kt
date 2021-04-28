@@ -32,8 +32,9 @@ class AuthPresenter(val view: View){
         return flag
     }
 
-    fun loginUser(userMail: String, userPassword: String) {
+    fun loginUser(userMail: String, userPassword: String):Boolean{
         val lAuth = FirebaseAuth.getInstance()
+        var flag=true
         lAuth.signInWithEmailAndPassword(userMail,userPassword)
             .addOnCompleteListener() { task->
                 if(task.isSuccessful)
@@ -47,13 +48,16 @@ class AuthPresenter(val view: View){
                     {
                         user.sendEmailVerification()
                         view.sendToast("Verification mail sent..")
+                        flag=false
                     }
                 }
                 else
                 {
                     view.sendToast("Failed to login")
+                    flag=false
                 }
             }
+        return flag
     }
 
 
