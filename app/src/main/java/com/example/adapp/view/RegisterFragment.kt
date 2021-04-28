@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.adapp.R
+import com.example.adapp.model.User
 import com.example.adapp.presenter.AuthPresenter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_register.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,20 +24,19 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class RegisterFragment : Fragment(), AuthPresenter.View {
+class RegisterFragment : Fragment(),AuthPresenter.View {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var regPresenter: AuthPresenter
-
+    lateinit var regPresenter:AuthPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        regPresenter= AuthPresenter(this)
 
-        regPresenter = AuthPresenter(this)
     }
 
     override fun onCreateView(
@@ -76,7 +78,21 @@ class RegisterFragment : Fragment(), AuthPresenter.View {
                 }
                 else
                 {
-                    regPresenter.createAccount(username,email,password,phoneNo)
+                    val isCreated=regPresenter.createAccount(username,email,password,phoneNo)
+                    if(isCreated)
+                    {
+                        Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
+                        val loginFrag=SignInFragment()
+                        activity!!.supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.parentL,loginFrag)
+                            .commit()
+                    }
+                    else
+                    {
+                        Toast.makeText(activity,"Registration Failed", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
             else
@@ -85,8 +101,41 @@ class RegisterFragment : Fragment(), AuthPresenter.View {
             }
 
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
+    fun createAccount(username: String, email: String, password: String, phoneNo: String) {
+        val fAuth= FirebaseAuth.getInstance()
+        fAuth.createUserWithEmailAndPassword(email,password)
+            .addOnCompleteListener(requireActivity()){
+                    task ->
+                if(task.isSuccessful)
+                {
+                    val user=fAuth.currentUser
+                    val userObj= User(username,email,password,phoneNo)
+                    FirebaseDatabase.getInstance().getReference("Users")
+                        .child(user.uid).setValue(userObj)
+                    Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
+                    FirebaseAuth.getInstance().signOut()
+                    val signInFragment=SignInFragment()
+
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.parentL,signInFragment)
+                        .commit()
+
+                }
+                else
+                {
+                    Toast.makeText(activity,"Unable to complete Registration..", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+    }
+
+
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -110,4 +159,6 @@ class RegisterFragment : Fragment(), AuthPresenter.View {
     override fun sendToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
+
+
 }
