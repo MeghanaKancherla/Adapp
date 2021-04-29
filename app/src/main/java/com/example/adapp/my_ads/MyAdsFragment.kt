@@ -35,10 +35,11 @@ class MyAdsFragment : Fragment() {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
+                /*layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
-                }
+                }*/
+                layoutManager=GridLayoutManager(context,2)
                 adapter = MyAdsRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }

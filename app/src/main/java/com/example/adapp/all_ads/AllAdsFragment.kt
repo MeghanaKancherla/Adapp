@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.adapp.R
 import com.example.adapp.dummy.DummyContent
+import com.google.firebase.database.GenericTypeIndicator
 
 /**
  * A fragment representing a list of Items.
@@ -35,10 +36,11 @@ class AllAdsFragment : Fragment() {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
+                /*layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
-                }
+                }*/
+                layoutManager=GridLayoutManager(context,2)
                 adapter = AllAdsRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
