@@ -22,6 +22,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     //add new ad -> adding details
+    <string name="add_details">Advertisement Details</string>
     <string name="title">Title : </string>
     <string name="description">Description :</string>
     <string name="price">Price :</string>
@@ -47,7 +48,6 @@
     <string name="verify">Verify Details</string>
     <string name="postadd">Post Add</string>
     <string name="location">Location:</string>
-
 
 
 </resources>

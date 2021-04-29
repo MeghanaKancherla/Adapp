@@ -26,7 +26,7 @@ class AuthPresenter(val view: View){
                 }
                 else
                 {
-                    flag=false
+                    flag = false
                 }
             }
         return flag
