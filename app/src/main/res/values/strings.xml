@@ -44,5 +44,12 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="brand">Select Brand</string>
+    <string name="upload">Upload Picture</string>
+    <string name="changeupload">Change Picture</string>
+    <string name="verify">Verify Details</string>
+    <string name="postadd">Post Add</string>
+    <string name="location">Location:</string>
+
+
 
 </resources>
