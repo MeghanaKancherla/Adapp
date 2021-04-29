@@ -50,7 +50,7 @@ class VerifyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         pref= activity?.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)!!
-        val area  = pref.getString("area", "Enter Location")
+        val area  = pref.getString("area", "Enter Location:")
         locationVerifyET.setText(area)
         super.onViewCreated(view, savedInstanceState)
 
