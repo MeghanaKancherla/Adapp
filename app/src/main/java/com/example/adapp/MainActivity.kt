@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 else
                     providerName = providerList[0]
             } else
-                Toast.makeText(this, " location not traced!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, " location not traced", Toast.LENGTH_SHORT).show()
             val loc = lManager.getLastKnownLocation(providerName)
             if (loc != null) {
                 lati = loc.latitude
