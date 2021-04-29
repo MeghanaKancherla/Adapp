@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import com.example.adapp.MainActivity
+import com.example.adapp.R
 import com.example.adapp.model.Response
 import com.example.adapp.presenter.AuthPresenter
 import com.example.adapp.presenter.FirebaseCallback
@@ -80,8 +82,8 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
 
         logoutB.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-            activity!!.finish()
-            startActivity(Intent(requireContext(),MainActivity::class.java))
+            requireActivity().finish()
+            startActivity(Intent(requireContext(), MainActivity::class.java))
 
         }
         cancelB.setOnClickListener{
