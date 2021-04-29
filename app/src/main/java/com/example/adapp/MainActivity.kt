@@ -7,6 +7,7 @@ import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.adapp.view.RegisterFragment
@@ -86,3 +87,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
