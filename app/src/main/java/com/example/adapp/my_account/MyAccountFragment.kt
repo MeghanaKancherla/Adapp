@@ -76,7 +76,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
 
         logoutB.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-            activity!!.finish()
+            requireActivity().finish()
             startActivity(Intent(requireContext(),MainActivity::class.java))
 
         }

@@ -1,20 +1,21 @@
 package com.example.adapp.view
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.example.adapp.R
-
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.adapp.R
+import com.example.adapp.model.Image
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -22,8 +23,8 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.fragment_image_picker.*
+import java.io.ByteArrayOutputStream
 import java.io.IOException
-
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,12 +39,16 @@ class ImagePickerFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var bundle : Bundle? = null
+    var imageUri: Uri? = null
+    var img = Image()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+            bundle = it.getBundle("adDeatils")
         }
     }
 
@@ -56,12 +61,12 @@ class ImagePickerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        //Toast.makeText(activity, "${bundle?.getString("brand")}\n${bundle?.getString("title")}", Toast.LENGTH_LONG).show()
         uploadImgB.visibility = View.INVISIBLE
 
         showPictureDialog()
 
-        changeUploadButton?.setOnClickListener( { showPictureDialog() })
+        changeUploadButton?.setOnClickListener({ showPictureDialog() })
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -82,7 +87,8 @@ class ImagePickerFragment : Fragment() {
 
         val pictureDialogItems = arrayOf(
             "Select photo from gallery",
-            "Capture photo from camera")
+            "Capture photo from camera"
+        )
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Select Action")
             .setItems(pictureDialogItems) { dialog, which ->
@@ -96,8 +102,10 @@ class ImagePickerFragment : Fragment() {
 //
     }
     fun choosePhotoFromGallary() {
-        val galleryIntent = Intent(Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
         startActivityForResult(galleryIntent, GALLERY)
     }
 
@@ -114,11 +122,15 @@ class ImagePickerFragment : Fragment() {
             if (data != null) {
                 val contentURI: Uri? = data.data
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, contentURI)
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        context?.contentResolver,
+                        contentURI
+                    )
                     selectedUploadImage!!.setImageBitmap(bitmap)
                     uploadImgB.visibility = View.VISIBLE
                     uploadImgB.setOnClickListener {
-                        val path = saveImage(bitmap)
+                        imageUri = contentURI
+                        img.imgUri = imageUri!!
                         nextFragmentNavigation()
                     }
                 } catch (e: IOException) {
@@ -126,23 +138,37 @@ class ImagePickerFragment : Fragment() {
                 }
             }
         } else if (requestCode == CAMERA) {
-            val thumbnail = data!!.extras!!["data"] as Bitmap?
-            selectedUploadImage!!.setImageBitmap(thumbnail)
-            uploadImgB.visibility = View.VISIBLE
-            uploadImgB.setOnClickListener {
-                saveImage(thumbnail)
-                nextFragmentNavigation()
+            if (data != null) {
+                val contentUri: Uri? = data.data
+                val thumbnail = data.extras!!["data"] as Bitmap?
+                selectedUploadImage!!.setImageBitmap(thumbnail)
+                uploadImgB.visibility = View.VISIBLE
+                uploadImgB.setOnClickListener {
+                    imageUri = getImageUri(requireContext(), thumbnail!!)
+                    img.imgUri = imageUri!!
+                    nextFragmentNavigation()
+                }
             }
         }
     }
-    fun saveImage(myBitmap: Bitmap?) {
-        //add firebase code here
 
-
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.getContentResolver(),
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 
     fun nextFragmentNavigation(){
-        findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment)
+        val imgBundle = Bundle()
+        imgBundle.putBundle("adBundle", bundle)
+        imgBundle.putSerializable("url", img)
+        findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment, imgBundle)
     }
 
     private fun requestMultiplePermissions() {
@@ -150,17 +176,25 @@ class ImagePickerFragment : Fragment() {
             .withPermissions(
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     // check if all permissions are granted
                     if (report.areAllPermissionsGranted()) {
-                        Toast.makeText(context, "All permissions are granted by user!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "All permissions are granted by user!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
 
-                override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
                     token?.continuePermissionRequest()
                 }
             }).withErrorListener { Toast.makeText(context, "Some Error! ", Toast.LENGTH_SHORT).show() }

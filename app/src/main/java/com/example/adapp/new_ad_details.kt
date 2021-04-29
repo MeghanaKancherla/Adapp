@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_new_ad_details.*
 
@@ -20,11 +23,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [new_ad_details.newInstance] factory method to
  * create an instance of this fragment.
  */
-class new_ad_details : Fragment() {
+class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var category: String? = null
+    var itemSelected = true
+    lateinit var item: String
+    var brand_category = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +63,10 @@ class new_ad_details : Fragment() {
                 // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
+                brand_category = 0
                 spinner.adapter = adapter
+
+                spinner.onItemSelectedListener = this
             }
         }
         if(category.equals("vehicle"))
@@ -70,12 +79,31 @@ class new_ad_details : Fragment() {
                 // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
+                brand_category = 1
                 spinner.adapter = adapter
+
+                spinner.onItemSelectedListener = this
             }
         }
 
         adNextB.setOnClickListener {
-            findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment)
+            val title = titleET.text.toString()
+            val desc = descET.text.toString()
+            val price = priceET.text.toString()
+            val bundle_ad = Bundle()
+            val bundle = bundleOf("category" to category, "brand" to item, "title" to title, "N" to desc, "price" to price)
+            bundle_ad.putBundle("adDeatils", bundle)
+            if(title.isNotEmpty() && desc.isNotEmpty() && price.isNotEmpty() && itemSelected) {
+                findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment, bundle_ad)
+            }
+            else if(title.isEmpty())
+                titleET.error = "Enter the title of Ad"
+            else if(desc.isEmpty())
+                descET.error = "Enter the description of Ad"
+            else if(price.isEmpty())
+                priceET.error = "Enter the price"
+            else
+                Toast.makeText(activity, "Select a brand", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -97,5 +125,22 @@ class new_ad_details : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when(brand_category) {
+            0 -> {
+                val mobileArray = resources.getStringArray(R.array.mobile_brand)
+                item = mobileArray[position]
+            }
+            1 -> {
+                val vehicleArray = resources.getStringArray(R.array.vehicle_brand)
+                item = vehicleArray[position]
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        itemSelected = false
     }
 }
