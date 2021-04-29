@@ -161,13 +161,17 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
     }
 
     override fun onResponse(response: Response) {
-        val userDetails=response.user!!
-        accountUserEmailET.isEnabled=false
-        accountUserNameET.isEnabled=false
-        accountUserPhoneET.isEnabled=false
-        accountUserPhoneET.setText(userDetails.phoneNumber)
-        accountUserEmailET.setText(userDetails.email)
-        accountUserNameET.setText(userDetails.username)
-        accountPB.visibility=View.INVISIBLE
+        val userDetails=response.user
+        if(userDetails!=null)
+        {
+            accountUserEmailET.isEnabled=false
+            accountUserNameET.isEnabled=false
+            accountUserPhoneET.isEnabled=false
+            accountUserPhoneET.setText(userDetails.phoneNumber)
+            accountUserEmailET.setText(userDetails.email)
+            accountUserNameET.setText(userDetails.username)
+            accountPB.visibility=View.INVISIBLE
+        }
+
     }
 }
