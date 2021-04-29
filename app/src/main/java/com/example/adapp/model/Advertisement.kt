@@ -15,3 +15,5 @@ data class Advertisement(var category: String? = null,
                          var uid: String? = null)
 
 data class Image(var imgUri: Uri? = null): Serializable
+
+data class Ad_response(var listOfAds: List<Advertisement>? = null)

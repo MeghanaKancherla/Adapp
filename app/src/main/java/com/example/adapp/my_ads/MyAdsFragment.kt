@@ -9,14 +9,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.adapp.R
-import com.example.adapp.dummy.DummyContent
+import com.example.adapp.model.Ad_response
+import com.example.adapp.model.Advertisement
+import com.example.adapp.presenter.AdDisplayPresenter
+import com.example.adapp.presenter.RetrieveAdsCallback
+import kotlinx.android.synthetic.main.fragment_item_my_ads.*
 
 /**
  * A fragment representing a list of Items.
  */
-class MyAdsFragment : Fragment() {
+class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
 
     private var columnCount = 1
+    lateinit var displayPresenter: AdDisplayPresenter
+    var adsList = listOf<Advertisement>()
+    lateinit var rList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +31,9 @@ class MyAdsFragment : Fragment() {
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
+
+        displayPresenter = AdDisplayPresenter(this)
+        displayPresenter.getMyAds(this)
     }
 
     override fun onCreateView(
@@ -39,8 +49,9 @@ class MyAdsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }*/
+                rList = view
                 layoutManager=GridLayoutManager(context,2)
-                adapter = MyAdsRecyclerViewAdapter(DummyContent.ITEMS)
+                //adapter = MyAdsRecyclerViewAdapter(adsList)
             }
         }
         return view
@@ -59,5 +70,25 @@ class MyAdsFragment : Fragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
+    }
+
+    override fun sendToast(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onResponse(response: Ad_response) {
+        val listAds = mutableListOf<Advertisement>()
+        val adlist = response.listOfAds
+        val uid = displayPresenter.getUid()
+        if(uid != null){
+            adlist?.forEach {
+                if(it.uid == uid){
+                    listAds.add(it)
+                }
+            }
+            adsList = listAds
+        }
+        rList.adapter = MyAdsRecyclerViewAdapter(adsList)
+        rList.adapter?.notifyDataSetChanged()
     }
 }

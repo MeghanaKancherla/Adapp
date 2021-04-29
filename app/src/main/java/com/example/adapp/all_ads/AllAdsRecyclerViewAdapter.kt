@@ -1,21 +1,23 @@
 package com.example.adapp.all_ads
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.adapp.R
 
-import com.example.adapp.dummy.DummyContent.DummyItem
+import com.example.adapp.model.Advertisement
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class AllAdsRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    private val values: List<Advertisement>
 ) : RecyclerView.Adapter<AllAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,14 +28,13 @@ class AllAdsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.adTitle.setText(item.content)
-        holder.adPrice.setText(item.id)
-        holder.adDescription.setText(item.id)
-        holder.adPrice.setText(item.id)
-        holder.adLocation.setText(item.id)
-        holder.adContactTV.setText(item.id)
+        holder.adTitle.setText(item.title)
+        holder.adDescription.setText(item.description)
+        holder.adPrice.setText(item.price.toString())
+        holder.adLocation.setText(item.location)
+        holder.adContactTV.setText(item.contact)
 
-
+        Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
     }
 
     override fun getItemCount(): Int = values.size
