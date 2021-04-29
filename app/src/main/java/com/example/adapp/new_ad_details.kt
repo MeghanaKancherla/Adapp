@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
+import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +60,7 @@ class new_ad_details : Fragment() {
                 spinner.adapter = adapter
             }
         }
-        if(category.equals("vehicle"))
+        else if(category.equals("vehicle"))
         {
             ArrayAdapter.createFromResource(
                 requireContext(),
@@ -70,6 +72,61 @@ class new_ad_details : Fragment() {
                 // Apply the adapter to the spinner
                 spinner.adapter = adapter
             }
+        }
+        else if(category.equals("electronics"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.electronics_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner.adapter = adapter
+            }
+        }
+        else if(category.equals("furniture"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.furniture_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner.adapter = adapter
+            }
+        }
+        else if(category.equals("property"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.property_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner.adapter = adapter
+            }
+        }
+        else
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.other_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner.adapter = adapter
+            }
+        }
+        view.findViewById<Button>(R.id.nextB).setOnClickListener{
+            findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment)
         }
     }
 
