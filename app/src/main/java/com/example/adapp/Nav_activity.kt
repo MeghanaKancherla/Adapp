@@ -57,7 +57,7 @@ class Nav_activity : AppCompatActivity() {
             commit()
         }
     fun addAdvertisement(view:View){
-        val newAdFragment = NewAdFragment()
+        val newAdFragment = New_ad_home()
         setCurrentFragment(newAdFragment)
     }
 }

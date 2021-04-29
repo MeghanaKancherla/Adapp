@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vehicle_brand">
+        <item>Bajaj</item>
+        <item>TVS</item>
+        <item>Maruthi Suzuki</item>
+        <item>Hundai</item>
+        <item>Tata</item>
+        <item>Mahindra</item>
+    </string-array>
+    <string-array name="mobile_brand">
+        <item>Apple</item>
+        <item>Samsung</item>
+        <item>Nokia</item>
+        <item>OnePlus</item>
+        <item>Xiaomi</item>
+        <item>Vivo</item>
+        <item>Oppo</item>
+    </string-array>
+</resources>
