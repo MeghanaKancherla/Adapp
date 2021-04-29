@@ -20,6 +20,7 @@
     <string name="accountInfo">Account Information</string>
     <string name="savechangesbutton">save</string>
     <string name="cancelbutton">cancel</string>
+    <string name="editdetails">Edit details</string>
 
     //choose category
     //content description for image buttons
