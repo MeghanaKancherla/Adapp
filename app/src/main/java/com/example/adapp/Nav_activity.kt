@@ -6,7 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.adapp.all_ads.AllAdsFragment
+import com.example.adapp.my_account.MyAccountFragment
+import com.example.adapp.my_ads.MyAdsFragment
+import com.example.adapp.new_ad.NewAdFragment
+import com.example.adapp.notification.NotificationFragment
 import kotlinx.android.synthetic.main.activity_nav_activity.*
 
 class Nav_activity : AppCompatActivity() {
@@ -50,11 +54,11 @@ class Nav_activity : AppCompatActivity() {
     //common function to set fragment to constraint layout
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.constraintLayout,fragment)
+            replace(R.id.fragment,fragment)
             commit()
         }
     fun addAdvertisement(view:View){
-        val newAdFragment = NewAdFragment()
+        val newAdFragment = New_ad_home()
         setCurrentFragment(newAdFragment)
     }
 }
