@@ -21,6 +21,31 @@
     <string name="myAd">My Ad</string>
     <string name="notification">Notification</string>
     <string name="newAd">Add a new advertisement</string>
+
+    //choose category
+    //content description for image buttons
+    <string name="vehicle">vehicle</string>
+    <string name="mobile">vehicle</string>
+    <string name="furniture">vehicle</string>
+    <string name="property">vehicle</string>
+    <string name="electronics">vehicle</string>
+    <string name="other">vehicle</string>
+    //button string
+    <string name="next">N E X T</string>
+    //text view
+    <string name="chooseCategory">CHOOSE CATEGORY</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //add new ad -> adding details
+    <string name="title">Title : </string>
+    <string name="description">Description :</string>
+    <string name="price">Price :</string>
+    <string name="title_activity_bottom__navigation_">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="brand">Select Brand</string>
+
     <string name="logoutbutton">logout</string>
     <string name="savechangesbutton">save</string>
     <string name="cancelbutton">cancel</string>
