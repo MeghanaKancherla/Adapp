@@ -14,6 +14,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -56,6 +57,8 @@ class ImagePickerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        uploadImgB.visibility = View.INVISIBLE
+
         showPictureDialog()
 
         changeUploadButton?.setOnClickListener( { showPictureDialog() })
@@ -80,7 +83,7 @@ class ImagePickerFragment : Fragment() {
         val pictureDialogItems = arrayOf(
             "Select photo from gallery",
             "Capture photo from camera")
-        MaterialAlertDialogBuilder(context!!)
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle("Select Action")
             .setItems(pictureDialogItems) { dialog, which ->
                 // Respond to item chosen
@@ -112,8 +115,12 @@ class ImagePickerFragment : Fragment() {
                 val contentURI: Uri? = data.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, contentURI)
-                    val path = saveImage(bitmap)
                     selectedUploadImage!!.setImageBitmap(bitmap)
+                    uploadImgB.visibility = View.VISIBLE
+                    uploadImgB.setOnClickListener {
+                        val path = saveImage(bitmap)
+                        nextFragmentNavigation()
+                    }
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -121,7 +128,11 @@ class ImagePickerFragment : Fragment() {
         } else if (requestCode == CAMERA) {
             val thumbnail = data!!.extras!!["data"] as Bitmap?
             selectedUploadImage!!.setImageBitmap(thumbnail)
-            saveImage(thumbnail)
+            uploadImgB.visibility = View.VISIBLE
+            uploadImgB.setOnClickListener {
+                saveImage(thumbnail)
+                nextFragmentNavigation()
+            }
         }
     }
     fun saveImage(myBitmap: Bitmap?) {
@@ -129,6 +140,11 @@ class ImagePickerFragment : Fragment() {
 
 
     }
+
+    fun nextFragmentNavigation(){
+        findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment)
+    }
+
     private fun requestMultiplePermissions() {
         Dexter.withActivity(activity)
             .withPermissions(

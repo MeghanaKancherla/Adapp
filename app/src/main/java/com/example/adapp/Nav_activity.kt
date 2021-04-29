@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.adapp.all_ads.AllAdsFragment
-import com.example.adapp.my_account.MyAccountFragment
 import com.example.adapp.my_ads.MyAdsFragment
 import com.example.adapp.new_ad.NewAdFragment
 import com.example.adapp.notification.NotificationFragment

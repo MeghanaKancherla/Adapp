@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_new_ad_details.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,6 +72,10 @@ class new_ad_details : Fragment() {
                 // Apply the adapter to the spinner
                 spinner.adapter = adapter
             }
+        }
+
+        adNextB.setOnClickListener {
+            findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment)
         }
     }
 

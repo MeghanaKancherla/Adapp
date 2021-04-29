@@ -21,6 +21,7 @@
     <string name="myAd">My Ad</string>
     <string name="notification">Notification</string>
     <string name="newAd">Add a new advertisement</string>
+    <string name="uploadImg">Upload Image</string>
 
     //choose category
     //content description for image buttons
