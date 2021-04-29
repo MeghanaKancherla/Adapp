@@ -80,7 +80,7 @@ class ImagePickerFragment : Fragment() {
         val pictureDialogItems = arrayOf(
             "Select photo from gallery",
             "Capture photo from camera")
-        MaterialAlertDialogBuilder(context!!)
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle("Select Action")
             .setItems(pictureDialogItems) { dialog, which ->
                 // Respond to item chosen
