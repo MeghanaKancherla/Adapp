@@ -31,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View, AddPresenter.View {
-    val PREF_NAME="pincodeValues"
+    val PREF_NAME = "currentLocation"
     lateinit var pref: SharedPreferences
     // TODO: Rename and change types of parameters
     private var param1: String? = null
