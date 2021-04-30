@@ -32,25 +32,7 @@ class AdDisplayPresenter(val view: View) {
             callback.onResponse(response)
         }
     }
-
-    fun getMyAds(callback: RetrieveAdsCallback){
-        adsRef.get().addOnCompleteListener { task ->
-            val response = Ad_response()
-            if(task.isSuccessful){
-                val result = task.result
-                result?.let {
-                    response.listOfAds = result.children.map {
-                        it.getValue(Advertisement::class.java)!!
-                    }
-                }
-            }
-            else{
-                view.sendToast("Not able to get the Ads")
-            }
-            callback.onResponse(response)
-        }
-    }
-
+    
     fun getUid(): String?{
         return user.uid
     }

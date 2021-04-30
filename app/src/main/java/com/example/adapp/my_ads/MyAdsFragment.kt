@@ -33,7 +33,7 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
         }
 
         displayPresenter = AdDisplayPresenter(this)
-        displayPresenter.getMyAds(this)
+        displayPresenter.getAllAds(this)
     }
 
     override fun onCreateView(
