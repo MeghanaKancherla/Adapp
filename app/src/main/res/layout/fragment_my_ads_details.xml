@@ -8,9 +8,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-16dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/adDetaisTitleTV"
+                android:id="@+id/adDetailsTitleTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -29,14 +29,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="119dp"
-                android:layout_height="108dp"
+                android:id="@+id/adDetailsIV"
+                android:layout_width="329dp"
+                android:layout_height="387dp"
                 android:layout_marginTop="20dp"
                 android:src="@android:drawable/btn_star_big_on"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adDetaisTitleTV" />
+                app:layout_constraintTop_toBottomOf="@+id/adDetailsTitleTV" />
 
             <TextView
                 android:id="@+id/adDetailsCategoryTV"
@@ -47,7 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                app:layout_constraintTop_toBottomOf="@+id/adDetailsIV" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -190,6 +190,17 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/adDetailsDeleteB"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsDescriptionTV" />
+
+            <ProgressBar
+                android:id="@+id/adDetailsProgressB"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintEnd_toStartOf="@+id/adDetailsCategoryTV"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/adDetailsIV" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

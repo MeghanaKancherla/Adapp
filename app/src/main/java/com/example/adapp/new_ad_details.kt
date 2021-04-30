@@ -12,12 +12,12 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.example.adapp.model.Advertisement
 import kotlinx.android.synthetic.main.fragment_new_ad_details.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,8 +26,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var advert: Advertisement? = null
+
     private var category: String? = null
     var itemSelected = true
     var item: String? = null
@@ -36,9 +36,10 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            advert = it.getSerializable(ARG_PARAM1) as Advertisement
+
             category = it.getString("category")
+
         }
     }
 
@@ -52,6 +53,12 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(advert != null){
+            titleET.setText(advert?.title)
+            descET.setText(advert?.description)
+            priceET.setText(advert?.price)
+        }
 
         val spinner =  view.findViewById<Spinner>(R.id.brand_spinner)
         if(category.equals("mobile"))
@@ -144,12 +151,13 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         adNextB.setOnClickListener {
+
             val title = titleET.text.toString()
             val desc = descET.text.toString()
             val price = priceET.text.toString()
             val bundle_ad = Bundle()
-            val bundle = bundleOf("category" to category, "brand" to item, "title" to title, "N" to desc, "price" to price)
-            bundle_ad.putBundle("adDeatils", bundle)
+            val bundle = bundleOf("category" to category, "brand" to item, "title" to title, "desc" to desc, "price" to price)
+            bundle_ad.putBundle("adDetails", bundle)
             if(title.isNotEmpty() && desc.isNotEmpty() && price.isNotEmpty() && itemSelected) {
                 findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment, bundle_ad)
             }
@@ -176,11 +184,10 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Advertisement) =
             new_ad_details().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
                 }
             }
     }

@@ -7,17 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.replace
 import com.example.adapp.R
 import androidx.navigation.fragment.findNavController
+import com.example.adapp.model.Advertisement
 import com.example.adapp.new_ad_details
 
 import kotlinx.android.synthetic.main.fragment_new_ad.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM2 = "ad"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,15 +28,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class NewAdFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var advert: Advertisement? = null
     lateinit var category_selected : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            advert = it.getSerializable(ARG_PARAM2) as Advertisement
         }
 
     }
@@ -51,37 +51,49 @@ class NewAdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //handling click of each image button
-        view.findViewById<ImageButton>(R.id.mobile_category_btn).setOnClickListener {
-            category_selected = "mobile"
-            navigate_to_details(category_selected)
-        }
-        view.findViewById<ImageButton>(R.id.vehicle_category_btn).setOnClickListener {
-            category_selected="vehicle"
-            navigate_to_details(category_selected)
-        }
-        view.findViewById<ImageButton>(R.id.furniture_category_btn).setOnClickListener {
-            category_selected="furniture"
-            navigate_to_details(category_selected)
-        }
-        view.findViewById<ImageButton>(R.id.electronics_category_btn).setOnClickListener {
-            category_selected="electronics"
-            navigate_to_details(category_selected)
-        }
-        view.findViewById<ImageButton>(R.id.property_category_btn).setOnClickListener {
-            category_selected="property"
-            navigate_to_details(category_selected)
-        }
-        view.findViewById<ImageButton>(R.id.other_category_btn).setOnClickListener {
-            category_selected="other"
-            navigate_to_details(category_selected)
-        }
+            view.findViewById<ImageButton>(R.id.mobile_category_btn).setOnClickListener {
+                category_selected = "mobile"
+                navigate_to_details(category_selected)
+            }
+            view.findViewById<ImageButton>(R.id.vehicle_category_btn).setOnClickListener {
+                category_selected = "vehicle"
+                navigate_to_details(category_selected)
+            }
+            view.findViewById<ImageButton>(R.id.furniture_category_btn).setOnClickListener {
+                category_selected = "furniture"
+                navigate_to_details(category_selected)
+            }
+            view.findViewById<ImageButton>(R.id.electronics_category_btn).setOnClickListener {
+                category_selected = "electronics"
+                navigate_to_details(category_selected)
+            }
+            view.findViewById<ImageButton>(R.id.property_category_btn).setOnClickListener {
+                category_selected = "property"
+                navigate_to_details(category_selected)
+            }
+            view.findViewById<ImageButton>(R.id.other_category_btn).setOnClickListener {
+                category_selected = "other"
+                navigate_to_details(category_selected)
+            }
     }
 
 
     //creating bundle aand navigating to ad_details_fragment
     private fun navigate_to_details(category_selected:String){
-        val bundle = bundleOf("category" to category_selected)
-        findNavController().navigate(R.id.action_newAdFragment_to_new_ad_details,bundle)
+        if(advert == null) {
+            val bundle = bundleOf("category" to category_selected)
+            findNavController().navigate(R.id.action_newAdFragment_to_new_ad_details, bundle)
+        }
+        else{
+            //Toast.makeText(activity, "$advert", Toast.LENGTH_LONG).show()
+            val adDetail = new_ad_details.newInstance(advert!!)
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment, adDetail)
+                    ?.addToBackStack(null)
+                    ?.commit()
+//            val bundle = bundleOf("category" to category_selected, "flag" to 1, "advert" to advert)
+//            findNavController().navigate(R.id.action_newAdFragment_to_new_ad_details, bundle)
+        }
     }
 
 
@@ -96,11 +108,10 @@ class NewAdFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param: Advertisement) =
             NewAdFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM2, param)
                 }
             }
     }

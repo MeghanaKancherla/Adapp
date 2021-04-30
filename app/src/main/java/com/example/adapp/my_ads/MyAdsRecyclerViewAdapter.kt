@@ -17,7 +17,8 @@ import com.example.adapp.model.Advertisement
  * TODO: Replace the implementation with code for your data type.
  */
 class MyAdsRecyclerViewAdapter(
-    private val values: List<Advertisement>
+    private val values: List<Advertisement>,
+    val listener: (Advertisement) -> Unit
 ) : RecyclerView.Adapter<MyAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +36,10 @@ class MyAdsRecyclerViewAdapter(
         holder.adContactTV.setText(item.contact)
 
         Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
+
+        holder.itemView.setOnClickListener {
+            listener(item)
+        }
     }
 
     override fun getItemCount(): Int = values.size

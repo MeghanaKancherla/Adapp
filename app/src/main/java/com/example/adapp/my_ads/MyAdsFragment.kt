@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.adapp.R
 import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
@@ -73,7 +74,7 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
     }
 
     override fun sendToast(message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onResponse(response: Ad_response) {
@@ -88,7 +89,14 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
             }
             adsList = listAds
         }
-        rList.adapter = MyAdsRecyclerViewAdapter(adsList)
+        rList.adapter = MyAdsRecyclerViewAdapter(adsList){
+            val myAd = MyAdsDetails.newInstance(it)
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment, myAd)
+                    ?.addToBackStack(null)
+                    ?.commit()
+
+        }
         rList.adapter?.notifyDataSetChanged()
     }
 }

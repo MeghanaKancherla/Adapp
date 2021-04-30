@@ -15,6 +15,7 @@ import com.example.adapp.R
 import com.example.adapp.model.Advertisement
 import com.example.adapp.model.Image
 import com.example.adapp.model.Response
+import com.example.adapp.my_ads.MyAdsFragment
 import com.example.adapp.presenter.AddPresenter
 import com.example.adapp.presenter.FirebaseCallback
 import com.example.adapp.presenter.MyAcountDataPresenter
@@ -76,7 +77,7 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
             val category = adBundle?.getString("category")
             val brand = adBundle?.getString("brand")
             val title = adBundle?.getString("title")
-            val desc = adBundle?.getString("description")
+            val desc = adBundle?.getString("desc")
             val price = adBundle?.getString("price")
             val imgUrl = img.imgUri.toString()
             val ad = Advertisement(category, brand, title, desc, price, imgUrl, name, phone, loc)
@@ -127,5 +128,9 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
 
     override fun stopProgressBar() {
         pBarVerify.visibility = View.GONE
+        val myAds = MyAdsFragment.newInstance(0)
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.fragment, myAds)
+                ?.commit()
     }
 }

@@ -21,6 +21,7 @@ class AddPresenter(val view: View) {
                         fileRef.downloadUrl.addOnSuccessListener {
                             ad.imageUrl = it.toString()
                             val addId = mRef.push().key!!
+                            ad.key = addId
                             mRef.child(addId).setValue(ad)
                             view.sentToast("Ad is added successfully!")
                             view.stopProgressBar()
@@ -39,19 +40,6 @@ class AddPresenter(val view: View) {
         }
     }
 
-    fun addAdvertisement(ad: Advertisement){
-        mRef.push().setValue(ad)
-            .addOnCompleteListener {
-                if(it.isSuccessful){
-                    view.sentToast("Ad is added successfully")
-                    view.stopProgressBar()
-                }
-                else{
-                    view.sentToast("Ad is not added")
-                    view.stopProgressBar()
-                }
-            }
-    }
 
     interface View{
         fun sentToast(message: String)
