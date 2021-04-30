@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class AdDisplayPresenter(val view: View) {
-    
+
     private val rootRef: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val adsRef: DatabaseReference = rootRef.child("Advertisements")
     val user = FirebaseAuth.getInstance().currentUser

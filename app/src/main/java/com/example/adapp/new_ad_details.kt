@@ -30,7 +30,7 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
     private var param2: String? = null
     private var category: String? = null
     var itemSelected = true
-    lateinit var item: String
+    var item: String? = null
     var brand_category = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
                 spinner.onItemSelectedListener = this
             }
         }
-        if(category.equals("vehicle"))
+        else if(category.equals("vehicle"))
         {
             ArrayAdapter.createFromResource(
                 requireContext(),
@@ -84,6 +84,62 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
                 spinner.adapter = adapter
 
                 spinner.onItemSelectedListener = this
+            }
+        }
+        else if(category.equals("electronics"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.electronics_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                brand_category = 2
+                spinner.adapter = adapter
+            }
+        }
+        else if(category.equals("furniture"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.furniture_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                brand_category = 3
+                spinner.adapter = adapter
+            }
+        }
+        else if(category.equals("property"))
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.property_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                brand_category = 4
+                spinner.adapter = adapter
+            }
+        }
+        else
+        {
+            ArrayAdapter.createFromResource(
+                    requireContext(),
+                    R.array.other_brand,
+                    android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                brand_category = 5
+                spinner.adapter = adapter
             }
         }
 
@@ -106,61 +162,7 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
             else
                 Toast.makeText(activity, "Select a brand", Toast.LENGTH_LONG).show()
         }
-        else if(category.equals("electronics"))
-        {
-            ArrayAdapter.createFromResource(
-                    requireContext(),
-                    R.array.electronics_brand,
-                    android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                spinner.adapter = adapter
-            }
-        }
-        else if(category.equals("furniture"))
-        {
-            ArrayAdapter.createFromResource(
-                    requireContext(),
-                    R.array.furniture_brand,
-                    android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                spinner.adapter = adapter
-            }
-        }
-        else if(category.equals("property"))
-        {
-            ArrayAdapter.createFromResource(
-                    requireContext(),
-                    R.array.property_brand,
-                    android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                spinner.adapter = adapter
-            }
-        }
-        else
-        {
-            ArrayAdapter.createFromResource(
-                    requireContext(),
-                    R.array.other_brand,
-                    android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                spinner.adapter = adapter
-            }
-        }
-        view.findViewById<Button>(R.id.nextB).setOnClickListener{
-            findNavController().navigate(R.id.action_new_ad_details_to_imagePickerFragment)
-        }
+
     }
 
     companion object {
@@ -192,6 +194,22 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
             1 -> {
                 val vehicleArray = resources.getStringArray(R.array.vehicle_brand)
                 item = vehicleArray[position]
+            }
+            2 -> {
+                val electronicsArray = resources.getStringArray(R.array.electronics_brand)
+                item = electronicsArray[position]
+            }
+            3 -> {
+                val furnitureArray = resources.getStringArray(R.array.furniture_brand)
+                item = furnitureArray[position]
+            }
+            4 -> {
+                val propertyArray = resources.getStringArray(R.array.property_brand)
+                item = propertyArray[position]
+            }
+            5 -> {
+                val otherArray = resources.getStringArray(R.array.other_brand)
+                item = otherArray[position]
             }
         }
     }
