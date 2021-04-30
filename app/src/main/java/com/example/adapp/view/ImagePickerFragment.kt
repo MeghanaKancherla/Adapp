@@ -62,6 +62,8 @@ class ImagePickerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //Toast.makeText(activity, "${bundle?.getString("brand")}\n${bundle?.getString("title")}", Toast.LENGTH_LONG).show()
+        requestMultiplePermissions()
+
         uploadImgB.visibility = View.INVISIBLE
 
         showPictureDialog()
