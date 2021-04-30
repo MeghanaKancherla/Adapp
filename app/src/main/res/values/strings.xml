@@ -1,21 +1,6 @@
 <resources>
+    //sample text for fragments
     <string name="app_name">AdApp</string>
-    <string name="username">  Enter Username</string>
-    <string name="email">  Email</string>
-    <string name="password">  Enter Password</string>
-    <string name="cpassword">  Confirm Password</string>
-    <string name="phonenumber">  Enter Phone Number</string>
-    <string name="register">  Register</string>
-    <string name="signin">  SIGN IN</string>
-    <string name="newuser">  New User? Create Account</string>
-    <string name="Registration"> User Registration</string>
-    <string name="userLogin"> User Login</string>
-    <string name="accountInfo">Account Info</string>
-    <string name="upload">Upload Picture</string>
-    <string name="changeupload">Change Picture</string>
-    <string name="verify">Verify Details</string>
-    <string name="postadd">Post Add</string>
-    <string name="location">Location:</string>
     <string name="allAds">ALL ADS FRAGMENT</string>
     <string name="myAccount">MY   ACCOUNT</string>
     <string name="myAd">My Ad</string>
@@ -47,7 +32,23 @@
     <string name="title_notifications">Notifications</string>
     <string name="brand">Select Brand</string>
 
-    <string name="logoutbutton">logout</string>
-    <string name="savechangesbutton">save</string>
-    <string name="cancelbutton">cancel</string>
+    <string name="username">  Enter Username</string>
+    <string name="email">  Email</string>
+    <string name="password">  Enter Password</string>
+    <string name="cpassword">  Confirm Password</string>
+    <string name="phonenumber">  Enter Phone Number</string>
+    <string name="register">  Register</string>
+    <string name="signin">  SIGN IN</string>
+    <string name="newuser">  New User? Create Account</string>
+    <string name="Registration"> User Registration</string>
+    <string name="userLogin"> User Login</string>
+    <string name="accountInfo">Account Info</string>
+    <string name="upload">Upload Picture</string>
+    <string name="changeupload">Change Picture</string>
+    <string name="verify">Verify Details</string>
+    <string name="postadd">Post Add</string>
+    <string name="location">Location:</string>
+
+
+
 </resources>
