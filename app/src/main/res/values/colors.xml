@@ -3,7 +3,7 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF53DAC5</color>
+    <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -40,22 +40,16 @@
     
     
     //new colours from pallete
-    <color name="skyBlue">#D2F0F3</color>
-    <color name="lightPurp">#A5A6EF</color>
+    <color name="skyBlue">#73b9E0</color>
+    <color name="skyGreen">#81ecec</color>
     <color name="greenBlue">#55efc4</color>
     <color name="mintGreen">#00b894</color>
     <color name="pinkRed">#ff7675</color>
     <color name="blurBlue">#3B3B98</color>
     <color name="whiteGreen">#CAD3C8</color>
     <color name="goldHoney">#EAB543</color>
-    <color name="backgroundTint">#dcf0fa</color>
 
-    //blue
-    <color name="Blue900">#002080</color>
-    <color name="Blue700">#50b8e7</color>
-    <color name="Blue500">#84cdee</color>
-    <color name="Blue300">#b9e2f5</color>
-    <color name="Blue200">#dcf0fa</color>
+
 
 
 
