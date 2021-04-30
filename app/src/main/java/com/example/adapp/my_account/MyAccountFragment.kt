@@ -1,10 +1,13 @@
-package com.example.adapp
+package com.example.adapp.my_account
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.adapp.MainActivity
+import com.example.adapp.R
 import com.example.adapp.model.Response
 import com.example.adapp.presenter.AuthPresenter
 import com.example.adapp.presenter.FirebaseCallback
@@ -28,6 +31,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
     private var param2: String? = null
     lateinit var myAcountDataPresenter: MyAcountDataPresenter
     lateinit var authPresenter: AuthPresenter
+    var PREF_USER="AccountInfo"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        setHasOptionsMenu(true)
+
         myAcountDataPresenter= MyAcountDataPresenter(this)
         myAcountDataPresenter.getAccountDetails(this)
         authPresenter=AuthPresenter(this)
@@ -49,43 +53,37 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
         return inflater.inflate(R.layout.fragment_my_account, container, false)
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        val item=menu.add("Edit Details")
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.title)
-        {
-            "Edit Details"->{
-                accountUserNameET.isEnabled=true
-                accountUserPhoneET.isEnabled=true
-                cancelB.visibility=View.VISIBLE
-                submitB.visibility=View.VISIBLE
-                logoutB.visibility=View.INVISIBLE
-
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        editDetailsB.setOnClickListener{
+            accountUserNameET.isEnabled=true
+            accountUserPhoneET.isEnabled=true
+            cancelB.visibility=View.VISIBLE
+            submitB.visibility=View.VISIBLE
+            logoutB.visibility=View.INVISIBLE
+        }
 
 
         logoutB.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             requireActivity().finish()
-            startActivity(Intent(requireContext(),MainActivity::class.java))
+            startActivity(Intent(requireContext(), MainActivity::class.java))
 
         }
         cancelB.setOnClickListener{
+            val pref=requireActivity().getSharedPreferences(PREF_USER,MODE_PRIVATE)
+            val username=pref.getString("username","")
+            val phoneNumber=pref.getString("phoneNumber","")
+            accountUserNameET.setText(username)
+            accountUserPhoneET.setText(phoneNumber)
             accountUserNameET.isEnabled=false
             accountUserPhoneET.isEnabled=false
             submitB.visibility=View.INVISIBLE
             cancelB.visibility=View.INVISIBLE
             logoutB.visibility=View.VISIBLE
+
+
+
 
         }
         submitB.setOnClickListener{
@@ -105,10 +103,9 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
     private fun displayAlertDialog() {
         var builder= androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setMessage("Are you sure you want make changes?")
-        builder.setPositiveButton("No")  {
-                dlg, i-> dlg.cancel()
+        builder.setPositiveButton("No")  { dlg, i-> dlg.cancel()
         }
-        builder.setNegativeButton("Yes") {dlg,i ->
+        builder.setNegativeButton("Yes") { dlg, i ->
             val changedUserName=accountUserNameET.text.toString()
             val changedPhoneNumber=accountUserPhoneET.text.toString()
            if(changedUserName.isEmpty())
@@ -124,7 +121,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
             {
                 accountUserPhoneET.setError("Enter a valid phone number!")
             }
-            authPresenter.updateData(changedPhoneNumber,changedUserName)
+            authPresenter.updateData(changedPhoneNumber, changedUserName)
         }
         builder.create().show()
     }
@@ -151,17 +148,26 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
     }
 
     override fun sendToast(message: String) {
-        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onResponse(response: Response) {
-        val userDetails=response.user!!
-        accountUserEmailET.isEnabled=false
-        accountUserNameET.isEnabled=false
-        accountUserPhoneET.isEnabled=false
-        accountUserPhoneET.setText(userDetails.phoneNumber)
-        accountUserEmailET.setText(userDetails.email)
-        accountUserNameET.setText(userDetails.username)
-        accountPB.visibility=View.INVISIBLE
+        val userDetails=response.user
+        if(userDetails!=null)
+        {
+            val pref=requireActivity().getSharedPreferences(PREF_USER,MODE_PRIVATE)
+            val editor=pref.edit()
+            editor.putString("username",userDetails.username)
+            editor.putString("phoneNumber",userDetails.phoneNumber)
+            editor.commit()
+            accountUserEmailET.isEnabled=false
+            accountUserNameET.isEnabled=false
+            accountUserPhoneET.isEnabled=false
+            accountUserPhoneET.setText(userDetails.phoneNumber)
+            accountUserEmailET.setText(userDetails.email)
+            accountUserNameET.setText(userDetails.username)
+            accountPB.visibility=View.INVISIBLE
+        }
+
     }
 }
