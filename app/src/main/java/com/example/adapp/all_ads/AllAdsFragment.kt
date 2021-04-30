@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.findNavController
 import com.example.adapp.R
 import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
@@ -54,6 +56,9 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback 
                 layoutManager=GridLayoutManager(context,2)
                 //adapter = AllAdsRecyclerViewAdapter(listOfAds)
             }
+        }
+        view.findViewById<CardView>(R.id.allAdCard).setOnClickListener {
+            findNavController().navigate(R.id.action_allAdsFragment_to_addDetailsFragment)
         }
         return view
     }
