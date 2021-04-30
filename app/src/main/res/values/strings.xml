@@ -53,6 +53,8 @@
     <string name="cancelbutton">Cancel</string>
     <string name="savechangesbutton">Save Changes</string>
     <string name="editdetails">Edit Details</string>
+    <string name="forgotpassword">Forgot Password?</string>
+    <string name="resetbutton">Reset Password</string>
 
 
 </resources>

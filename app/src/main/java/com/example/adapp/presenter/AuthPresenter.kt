@@ -1,5 +1,6 @@
 package com.example.adapp.presenter
 
+import android.widget.Toast
 import com.example.adapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -64,6 +65,18 @@ class AuthPresenter(val view: View){
         view.sendToast("Changes made successfully")
         //Toast.makeText(activity,"Changes made successfully",Toast.LENGTH_SHORT).show()
     }
+    fun resetPassword(email:String)
+    {
+        val auth=FirebaseAuth.getInstance()
+
+        auth.sendPasswordResetEmail(email).addOnSuccessListener {
+            view.sendToast("Check your email to reset Password!")
+        }.addOnFailureListener{
+            view.sendToast("Something went wrong. Try again!")
+        }
+
+    }
+
 
     interface View{
         fun sendToast(message: String)
