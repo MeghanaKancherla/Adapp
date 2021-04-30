@@ -53,6 +53,18 @@
     <string name="cancelbutton">Cancel</string>
     <string name="savechangesbutton">Save Changes</string>
     <string name="editdetails">Edit Details</string>
+    <string name="forgotpassword">Forgot Password?</string>
+    <string name="resetbutton">Reset Password</string>
+    <string name="Detailscategory">Category :</string>
+    <string name="Detailsbrand">Brand :</string>
+    <string name="Detailsprice">Price :</string>
+    <string name="DetailsLocation">Location :</string>
+    <string name="Detailsusername">Username :</string>
+    <string name="Detailscontact">Contact :</string>
+    <string name="Detailsdescription">Description :</string>
+    <string name="DetailsEditButton">edit</string>
+    <string name="DetailsDeleteButton">delete</string>
+
 
 
 </resources>

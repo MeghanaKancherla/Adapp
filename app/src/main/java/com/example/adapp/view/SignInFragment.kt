@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.adapp.ForgotPasswordActivity
 import com.example.adapp.Nav_activity
 import com.example.adapp.R
 import com.example.adapp.presenter.AuthPresenter
@@ -80,7 +81,10 @@ class SignInFragment : Fragment(),AuthPresenter.View {
 
         newUser.setOnClickListener {
             val regFrag=RegisterFragment()
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+        }
+        forgotPasswordTV.setOnClickListener {
+            startActivity(Intent(requireActivity(),ForgotPasswordActivity::class.java))
         }
         super.onViewCreated(view, savedInstanceState)
     }
