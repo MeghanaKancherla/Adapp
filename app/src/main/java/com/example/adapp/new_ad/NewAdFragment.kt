@@ -86,7 +86,7 @@ class NewAdFragment : Fragment() {
         }
         else{
             //Toast.makeText(activity, "$advert", Toast.LENGTH_LONG).show()
-            val adDetail = new_ad_details.newInstance(advert!!)
+            val adDetail = new_ad_details.newInstance(advert!!, category_selected)
             activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment, adDetail)
                     ?.addToBackStack(null)

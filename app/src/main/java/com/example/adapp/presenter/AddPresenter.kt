@@ -40,6 +40,32 @@ class AddPresenter(val view: View) {
         }
     }
 
+    fun updateAd(ad: Advertisement, uri: Uri){
+        val fileRef = ref.child("${System.currentTimeMillis()}.${view.getFileExtension(uri)}")
+        fileRef.putFile(uri)
+                .addOnSuccessListener {
+                    fileRef.downloadUrl.addOnSuccessListener {
+                        ad.imageUrl = it.toString()
+                        mRef.child(ad.key!!).setValue(ad)
+                        view.sentToast("Ad is added successfully!")
+                        view.stopProgressBar()
+                    }
+                }
+                .addOnProgressListener {
+
+                }
+                .addOnFailureListener {
+                    view.sentToast("Uploading Failed")
+                    view.stopProgressBar()
+                }
+    }
+
+    fun updateAdWithoutImage(ad: Advertisement){
+        mRef.child(ad.key!!).setValue(ad)
+        view.sentToast("Ad is Updated!")
+        view.stopProgressBar()
+    }
+
 
     interface View{
         fun sentToast(message: String)

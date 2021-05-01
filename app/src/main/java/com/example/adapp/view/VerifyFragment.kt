@@ -35,20 +35,23 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
     val PREF_NAME = "currentLocation"
     lateinit var pref: SharedPreferences
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var imgUri: Image? = null
+    private var ad: Advertisement? = null
     lateinit var accountPresenter: MyAcountDataPresenter
     var adBundle: Bundle? = null
-    lateinit var img: Image
+    var img: Image? = null
     lateinit var addPresenter: AddPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-            adBundle = it.getBundle("adBundle")
-            img = it.getSerializable("url") as Image
+            imgUri = it.getSerializable(ARG_PARAM1) as Image
+            ad = it.getSerializable(ARG_PARAM2) as Advertisement
+
+            if(ad == null) {
+                adBundle = it.getBundle("adBundle")
+                img = it.getSerializable("url") as Image
+            }
         }
         accountPresenter = MyAcountDataPresenter(this)
         accountPresenter.getAccountDetails(this)
@@ -74,17 +77,34 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
             val name = usernameVerifyET.text.toString()
             val phone = contactVerifyET.text.toString()
             val loc = locationVerifyET.text.toString()
-            val category = adBundle?.getString("category")
-            val brand = adBundle?.getString("brand")
-            val title = adBundle?.getString("title")
-            val desc = adBundle?.getString("desc")
-            val price = adBundle?.getString("price")
-            val imgUrl = img.imgUri.toString()
-            val ad = Advertisement(category, brand, title, desc, price, imgUrl, name, phone, loc)
-            pBarVerify.visibility = View.VISIBLE
-            addPresenter.addAd(ad, img.imgUri!!)
-            //Toast.makeText(activity, "$ad", Toast.LENGTH_LONG).show()
+            if (adBundle != null) {
+                val category = adBundle?.getString("category")
+                val brand = adBundle?.getString("brand")
+                val title = adBundle?.getString("title")
+                val desc = adBundle?.getString("desc")
+                val price = adBundle?.getString("price")
+                val imgUrl = img?.imgUri?.toString()
+                val ad = Advertisement(category, brand, title, desc, price, imgUrl, name, phone, loc)
+                pBarVerify.visibility = View.VISIBLE
+                addPresenter.addAd(ad, img?.imgUri!!)
+                //Toast.makeText(activity, "$ad", Toast.LENGTH_LONG).show()
+            }
+            else{
+                ad?.uname = name
+                ad?.contact = phone
+                ad?.location = loc
+
+                if(imgUri?.imgUri != null){
+                    pBarVerify.visibility = View.VISIBLE
+                    addPresenter.updateAd(ad!!, imgUri?.imgUri!!)
+                }
+                else{
+                    pBarVerify.visibility = View.VISIBLE
+                    addPresenter.updateAdWithoutImage(ad!!)
+                }
+            }
         }
+
     }
     companion object {
         /**
@@ -97,11 +117,11 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Image, param2: Advertisement) =
             VerifyFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+                    putSerializable(ARG_PARAM2, param2)
                 }
             }
     }

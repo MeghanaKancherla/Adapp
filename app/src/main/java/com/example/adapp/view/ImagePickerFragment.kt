@@ -14,7 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.adapp.R
+import com.example.adapp.model.Advertisement
 import com.example.adapp.model.Image
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
@@ -23,6 +25,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.fragment_image_picker.*
+import kotlinx.android.synthetic.main.fragment_my_ads_details.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
@@ -30,24 +33,23 @@ import java.io.IOException
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class ImagePickerFragment : Fragment() {
 
     private val GALLERY : Int = 1
     private  val CAMERA : Int = 2
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var advert: Advertisement? = null
     var bundle : Bundle? = null
     var imageUri: Uri? = null
     var img = Image()
+    var changeSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            advert = it.getSerializable(ARG_PARAM1) as Advertisement
+
             bundle = it.getBundle("adDetails")
         }
     }
@@ -61,26 +63,37 @@ class ImagePickerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //Toast.makeText(activity, "${bundle?.getString("brand")}\n${bundle?.getString("title")}", Toast.LENGTH_LONG).show()
+
         requestMultiplePermissions()
+        if(advert != null){
+            uploadImgB.visibility = View.VISIBLE
+            Glide.with(view.context).load(Uri.parse(advert?.imageUrl)).into(selectedUploadImage)
+            changeUploadButton?.setOnClickListener{
+                showPictureDialog()
+                changeSelected = true
+            }
+            uploadImgB.setOnClickListener {
+                nextFragmentNavigation()
+            }
+        }
+        else {
+            uploadImgB.visibility = View.INVISIBLE
 
-        uploadImgB.visibility = View.INVISIBLE
+            showPictureDialog()
 
-        showPictureDialog()
+            changeUploadButton?.setOnClickListener({ showPictureDialog() })
 
-        changeUploadButton?.setOnClickListener({ showPictureDialog() })
-
-        super.onViewCreated(view, savedInstanceState)
+            super.onViewCreated(view, savedInstanceState)
+        }
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Advertisement) =
             ImagePickerFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
                 }
             }
     }
@@ -167,10 +180,28 @@ class ImagePickerFragment : Fragment() {
     }
 
     fun nextFragmentNavigation(){
-        val imgBundle = Bundle()
-        imgBundle.putBundle("adBundle", bundle)
-        imgBundle.putSerializable("url", img)
-        findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment, imgBundle)
+        if(advert == null) {
+            val imgBundle = Bundle()
+            imgBundle.putBundle("adBundle", bundle)
+            imgBundle.putSerializable("url", img)
+            findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment, imgBundle)
+        }
+        else{
+            if(changeSelected){
+                val verifyFragment = VerifyFragment.newInstance(img, advert!!)
+                activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragment, verifyFragment)
+                        ?.addToBackStack(null)
+                        ?.commit()
+            }
+            else{
+                val verifyFragment = VerifyFragment.newInstance(img, advert!!)
+                activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragment, verifyFragment)
+                        ?.addToBackStack(null)
+                        ?.commit()
+            }
+        }
     }
 
     private fun requestMultiplePermissions() {
