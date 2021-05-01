@@ -14,6 +14,7 @@ import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
 import com.example.adapp.presenter.AdDisplayPresenter
 import com.example.adapp.presenter.RetrieveAdsCallback
+import com.example.adapp.view.NoAddsFragment
 import kotlinx.android.synthetic.main.fragment_item_my_ads.*
 
 /**
@@ -88,14 +89,23 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
             }
             adsList = listAds
         }
-        rList.adapter = MyAdsRecyclerViewAdapter(adsList){
-            val myAd = MyAdsDetails.newInstance(it)
-            activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment, myAd)
-                    ?.addToBackStack(null)
-                    ?.commit()
+        rList.adapter?.notifyDataSetChanged()
+        if(adsList.isEmpty())
+        {
+            val noAdsFragment=NoAddsFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment,noAdsFragment).commit()
 
         }
-        rList.adapter?.notifyDataSetChanged()
+        else {
+            rList.adapter = MyAdsRecyclerViewAdapter(adsList) {
+                val myAd = MyAdsDetails.newInstance(it)
+                activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragment, myAd)
+                        ?.addToBackStack(null)
+                        ?.commit()
+
+            }
+        }
+
     }
 }
