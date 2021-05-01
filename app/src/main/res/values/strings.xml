@@ -48,11 +48,14 @@
     <string name="verify">Verify Details</string>
     <string name="postadd">Post Add</string>
     <string name="location">Location:</string>
-    <string name="add_details">Add Details</string>
+    <string name="ad_details">Ad Details</string>
     <string name="logoutbutton">Logout</string>
     <string name="cancelbutton">Cancel</string>
     <string name="savechangesbutton">Save Changes</string>
     <string name="editdetails">Edit Details</string>
 
+    <!--    all ads strings-->
+    <string name="rupee">₹</string>
+    <string name="contact">Phone:</string>
 
 </resources>
