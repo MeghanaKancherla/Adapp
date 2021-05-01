@@ -1,5 +1,6 @@
 package com.example.adapp
 
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.adapp.my_account.MyAccountFragment
 import com.example.adapp.my_ads.MyAdsFragment
 import com.example.adapp.new_ad.NewAdFragment
 import com.example.adapp.notification.NotificationFragment
+import com.example.adapp.view.NoInternetFragment
 import kotlinx.android.synthetic.main.activity_nav_activity.*
 
 class Nav_activity : AppCompatActivity() {
@@ -29,22 +31,57 @@ class Nav_activity : AppCompatActivity() {
 
         //click listener to bottom navigation bar items
         bottomNavigationView.setOnNavigationItemSelectedListener {
+            val isOnline=isOnline()
+
             when(it.itemId){
                 R.id.home -> {
-                    val allAdsFragment = AllAdsFragment()
-                    setCurrentFragment(allAdsFragment) }
+                    if (isOnline) {
+                        val allAdsFragment = AllAdsFragment()
+                        setCurrentFragment(allAdsFragment)
+                    }
+                    else
+                    {
+                        val noInternetFragment=NoInternetFragment()
+                        setCurrentFragment(noInternetFragment)
+                    }
+                }
+
 
                 R.id.myAds ->{
-                    val myAdsFragment = MyAdsFragment()
-                    setCurrentFragment(myAdsFragment)
+                    if (isOnline) {
+                        val myAdsFragment = MyAdsFragment()
+                        setCurrentFragment(myAdsFragment)
+                    }
+                    else
+                    {
+                        val noInternetFragment=NoInternetFragment()
+                        setCurrentFragment(noInternetFragment)
+                    }
+
                 }
                 R.id.account ->{
-                    val myAccountFragment = MyAccountFragment()
-                    setCurrentFragment(myAccountFragment)
+                    if (isOnline) {
+                        val myAccountFragment = MyAccountFragment()
+                        setCurrentFragment(myAccountFragment)
+                    }
+                    else
+                    {
+                        val noInternetFragment=NoInternetFragment()
+                        setCurrentFragment(noInternetFragment)
+                    }
+
                 }
                 R.id.notifications ->{
-                    val notificationFragment = NotificationFragment()
-                    setCurrentFragment(notificationFragment)
+                    if (isOnline) {
+                        val notificationFragment = NotificationFragment()
+                        setCurrentFragment(notificationFragment)
+                    }
+                    else
+                    {
+                        val noInternetFragment=NoInternetFragment()
+                        setCurrentFragment(noInternetFragment)
+                    }
+
                 }
             }
             true
@@ -60,5 +97,10 @@ class Nav_activity : AppCompatActivity() {
     fun addAdvertisement(view:View){
         val newAdFragment = New_ad_home()
         setCurrentFragment(newAdFragment)
+    }
+    private fun isOnline(): Boolean {
+        val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=connectivityManager.activeNetworkInfo
+        return networkInfo?.isConnected==true
     }
 }
