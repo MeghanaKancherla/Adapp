@@ -38,8 +38,10 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            advert = it.getSerializable(ARG_PARAM1) as Advertisement
             category_selected = it.getString(ARG_PARAM2)
+            if(category_selected != null) {
+                advert = it.getSerializable(ARG_PARAM1) as Advertisement
+            }
 
             category = it.getString("category")
 
