@@ -1,5 +1,6 @@
 package com.example.adapp
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -37,5 +38,9 @@ class ForgotPasswordActivity : AppCompatActivity(),AuthPresenter.View{
 
     override fun sendToast(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getFileExtension(uri: Uri): String? {
+        return null
     }
 }

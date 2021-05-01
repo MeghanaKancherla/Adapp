@@ -1,6 +1,7 @@
 package com.example.adapp.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -112,5 +113,9 @@ class SignInFragment : Fragment(),AuthPresenter.View {
 
     override fun sendToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun getFileExtension(uri: Uri): String? {
+        return null
     }
 }
