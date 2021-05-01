@@ -40,8 +40,8 @@
 
     <Button
         android:id="@+id/changeUploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="133dp"
         android:background="@drawable/curve_reactangle_night"
         android:text="@string/changeupload"
