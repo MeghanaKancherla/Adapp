@@ -32,8 +32,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="brand">Select Brand</string>
 
-    <string name="username">  Enter Username</string>
-    <string name="email">  Email</string>
+    <string name="username">Enter Username</string>
+    <string name="email">Email</string>
     <string name="password">  Enter Password</string>
     <string name="cpassword">  Confirm Password</string>
     <string name="phonenumber">  Enter Phone Number</string>
