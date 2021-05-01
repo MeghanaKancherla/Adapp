@@ -32,7 +32,6 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
-
         displayPresenter = AdDisplayPresenter(this)
         displayPresenter.getAllAds(this)
     }

@@ -23,7 +23,7 @@ class MyAdsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_all_ads, parent, false)
+            .inflate(R.layout.fragment_my_ads, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,9 +31,9 @@ class MyAdsRecyclerViewAdapter(
         val item = values[position]
         holder.adTitle.setText(item.title)
         holder.adDescription.setText(item.description)
-        holder.adPrice.setText(item.price.toString())
-        holder.adLocation.setText(item.location)
-        holder.adContactTV.setText(item.contact)
+        holder.adPrice.text = (item.price.toString())
+        holder.adLocation.text = (item.location)
+        holder.adContactTV.text = (item.contact)
 
         Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
 
@@ -50,7 +50,7 @@ class MyAdsRecyclerViewAdapter(
         val adLocation: TextView = view.findViewById(R.id.adLocationTV)
         val adDescription: TextView = view.findViewById(R.id.adDescriptionTV)
         val adContactTV: TextView = view.findViewById(R.id.adContactTV)
-        val adImage: ImageView =view.findViewById(R.id.adImageIV)
+        val adImage: ImageView =view.findViewById(R.id.adImageTV)
 
     }
 }

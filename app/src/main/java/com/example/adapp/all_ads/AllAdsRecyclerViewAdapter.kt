@@ -30,10 +30,10 @@ class AllAdsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.adTitle.setText(item.title)
-        holder.adDescription.setText(item.description)
-        holder.adPrice.setText(item.price.toString())
+        //holder.adDescription.setText(item.description)
+        holder.adPrice.setText((item.price.toString()))
         holder.adLocation.setText(item.location)
-        holder.adContactTV.setText(item.contact)
+        //holder.adContactTV.setText(item.contact)
 
         Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
 
@@ -45,12 +45,12 @@ class AllAdsRecyclerViewAdapter(
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val adTitle: TextView = view.findViewById(R.id.adTitleTV)
-        val adPrice: TextView = view.findViewById(R.id.adPriceTV)
-        val adLocation: TextView = view.findViewById(R.id.adLocationTV)
-        val adDescription: TextView = view.findViewById(R.id.adDescriptionTV)
-        val adContactTV: TextView = view.findViewById(R.id.adContactTV)
-        val adImage:ImageView=view.findViewById(R.id.adImageIV)
+        val adTitle: TextView = view.findViewById(R.id.TitleTV)
+        val adPrice: TextView = view.findViewById(R.id.PriceTV)
+        val adLocation: TextView = view.findViewById(R.id.LocationTV)
+        //val adDescription: TextView = view.findViewById(R.id.adDescriptionTV)
+        //val adContactTV: TextView = view.findViewById(R.id.adContactTV)
+        val adImage:ImageView=view.findViewById(R.id.ImageIV)
 
     }
 }
