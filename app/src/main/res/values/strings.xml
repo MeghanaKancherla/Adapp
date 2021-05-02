@@ -72,5 +72,12 @@
     <!--    all ads strings-->
     <string name="rupee">₹</string>
     <string name="contact">Phone:</string>
-
+    
+<!--    strings for categories-->
+    <string name="vehicles">VEHICLES</string>
+    <string name="phones">GADGETS</string>
+    <string name="furnitures">FURNITURE</string>
+    <string name="electronic">HOME APPLIANCES</string>
+    <string name="properties">PROPERTY</string>
+    <string name="others">OTHER</string>
 </resources>

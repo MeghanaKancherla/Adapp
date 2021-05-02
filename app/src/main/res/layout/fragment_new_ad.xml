@@ -8,78 +8,196 @@
     android:backgroundTint="#00BCD4"
     tools:context=".new_ad.NewAdFragment">
 
-    <androidx.gridlayout.widget.GridLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="30dp"
-        android:background="#DEEFCB"
-        app:columnCount="2"
-        app:rowCount="3">
+        android:layout_marginTop="45dp"
+        android:background="#DEEFCB">
 
         <ImageButton
-            android:id="@+id/vehicle_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/vehicle"
-            android:src="@android:drawable/ic_menu_preferences"
+            android:id="@+id/mobile_category_btn"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
+            android:background="#DEEFCB"
+            android:elevation="5dp"
+            android:src="@mipmap/ic_multiple_devices_foreground"
             app:layout_columnWeight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_category_btn"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_gravity="fill"
             app:layout_rowWeight="1" />
 
         <ImageButton
-            android:id="@+id/mobile_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/mobile"
-            android:src="@android:drawable/stat_sys_phone_call"
+            android:id="@+id/vehicle_category_btn"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
+            android:background="#DEEFCB"
+            android:elevation="5dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:src="@mipmap/ic_vehivle3_foreground"
+            app:layout_constraintEnd_toStartOf="@+id/mobile_category_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/electronics_category_btn"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="24dp"
+            android:background="#DEEFCB"
+            android:contentDescription="@string/electronics"
+            android:elevation="5dp"
+            android:src="@mipmap/ic_appliances_foreground"
             app:layout_columnWeight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/furniture_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
             app:layout_gravity="fill"
             app:layout_rowWeight="1" />
 
         <ImageButton
             android:id="@+id/furniture_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="24dp"
+            android:background="#DEEFCB"
             android:contentDescription="@string/furniture"
-            android:src="@android:drawable/ic_dialog_dialer"
+            android:elevation="5dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_furniture_foreground"
             app:layout_columnWeight="1"
-            app:layout_gravity="fill"
-            app:layout_rowWeight="1" />
-
-        <ImageButton
-            android:id="@+id/property_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/property"
-            android:src="@drawable/ic_home"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill"
-            app:layout_rowWeight="1" />
-
-        <ImageButton
-            android:id="@+id/electronics_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/electronics"
-            android:src="@android:drawable/ic_menu_camera"
-            app:layout_columnWeight="1"
+            app:layout_constraintEnd_toStartOf="@+id/electronics_category_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
             app:layout_gravity="fill"
             app:layout_rowWeight="1" />
 
         <ImageButton
             android:id="@+id/other_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="44dp"
+            android:background="#DEEFCB"
             android:contentDescription="@string/other"
-            android:src="@android:drawable/btn_star_big_on"
+            android:elevation="5dp"
+            android:src="@mipmap/ic_other_foreground"
             app:layout_columnWeight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/property_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
             app:layout_gravity="fill"
             app:layout_rowWeight="1" />
 
-    </androidx.gridlayout.widget.GridLayout>
+        <ImageButton
+            android:id="@+id/property_category_btn"
+            android:layout_width="143dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="44dp"
+            android:background="#DEEFCB"
+            android:contentDescription="@string/property"
+            android:elevation="5dp"
+            android:src="@mipmap/ic_property2_foreground"
+            app:layout_columnWeight="1"
+            app:layout_constraintEnd_toStartOf="@+id/other_category_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            app:layout_gravity="fill"
+            app:layout_rowWeight="1" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/vehicles"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/vehicle_category_btn"
+            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintStart_toStartOf="@+id/vehicle_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/vehicle_category_btn" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/phones"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/mobile_category_btn"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="@+id/mobile_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/mobile_category_btn" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/furnitures"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/furniture_category_btn"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="@+id/furniture_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/furniture_category_btn" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/electronic"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/electronics_category_btn"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/electronics_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/electronics_category_btn" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/properties"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/property_category_btn"
+            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintStart_toStartOf="@+id/property_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/property_category_btn" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/others"
+            android:textColor="#AE3D35"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/other_category_btn"
+            app:layout_constraintStart_toStartOf="@+id/other_category_btn"
+            app:layout_constraintTop_toBottomOf="@+id/other_category_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView"
