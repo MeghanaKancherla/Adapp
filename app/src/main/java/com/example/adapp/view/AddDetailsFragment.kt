@@ -1,23 +1,20 @@
 package com.example.adapp.view
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.adapp.R
-import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
-import com.example.adapp.presenter.AdDisplayPresenter
-import com.example.adapp.presenter.RetrieveAdsCallback
 import kotlinx.android.synthetic.main.fragment_add_details.*
+import kotlinx.android.synthetic.main.fragment_my_ads_details.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "adDetails"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,28 +23,30 @@ private const val ARG_PARAM2 = "param2"
  */
 class AddDetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private var ad: Advertisement? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            ad = it.getSerializable(ARG_PARAM1) as Advertisement
         }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_details, container, false)
-
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adDetailsTitleT.text = ad?.title
+        adDetailPriceT.text = ad?.price
+        adDetailDescT.text = ad?.description
+        adDetailLocT.text = ad?.location
 
-
+        Glide.with(view.context).load(Uri.parse(ad?.imageUrl)).into(adDetailImg)
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -59,11 +58,10 @@ class AddDetailsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Advertisement) =
                 AddDetailsFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+                        putSerializable(ARG_PARAM1, param1)
                     }
                 }
     }

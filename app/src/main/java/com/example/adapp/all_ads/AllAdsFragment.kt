@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.replace
 import com.example.adapp.R
 import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
 import com.example.adapp.presenter.AdDisplayPresenter
 import com.example.adapp.presenter.RetrieveAdsCallback
+import com.example.adapp.view.AddDetailsFragment
 import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.android.synthetic.main.fragment_item_all_ads.*
 
@@ -57,9 +57,6 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback 
                 //adapter = AllAdsRecyclerViewAdapter(listOfAds)
             }
         }
-        view.findViewById<CardView>(R.id.allAdCard).setOnClickListener {
-            findNavController().navigate(R.id.action_allAdsFragment_to_addDetailsFragment)
-        }
         return view
     }
 
@@ -84,7 +81,13 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback 
 
     override fun onResponse(response: Ad_response) {
         listOfAds = response.listOfAds!!
-        rView.adapter = AllAdsRecyclerViewAdapter(listOfAds)
+        rView.adapter = AllAdsRecyclerViewAdapter(listOfAds){
+            val adFragment = AddDetailsFragment.newInstance(it)
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment, adFragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+        }
         rView.adapter?.notifyDataSetChanged()
     }
 }

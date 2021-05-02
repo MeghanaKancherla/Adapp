@@ -12,7 +12,8 @@ data class Advertisement(var category: String? = null,
                          var uname: String? = null,
                          var contact: String? = null,
                          var location: String? = null,
-                         var uid: String? = null)
+                         var uid: String? = null,
+                         var key: String? = null): Serializable
 
 data class Image(var imgUri: Uri? = null): Serializable
 
