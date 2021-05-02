@@ -10,12 +10,13 @@
         android:id="@+id/addverDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
         tools:context=".view.AddDetailsFragment">
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="371dp"
-            android:layout_height="35dp"
+            android:layout_width="368dp"
+            android:layout_height="28dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/curve_reactangle_night"
             android:text="@string/add_details"
@@ -33,10 +34,10 @@
             android:layout_width="356dp"
             android:layout_height="268dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adDetailsTitleT"
             tools:src="@tools:sample/avatars" />
@@ -45,12 +46,13 @@
             android:id="@+id/adDetailsTitleT"
             android:layout_width="203dp"
             android:layout_height="44dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="39dp"
             android:text="Title(use setText)"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/adDetailPriceT"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -60,7 +62,7 @@
             android:layout_height="41dp"
             android:layout_marginTop="30dp"
             android:text="Price"
-            android:textColor="#69D61B"
+            android:textColor="@color/pinkRed"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
@@ -68,8 +70,8 @@
 
         <TextView
             android:id="@+id/adDetailDescT"
-            android:layout_width="356dp"
-            android:layout_height="44dp"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
             android:layout_marginTop="8dp"
             android:text="description"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +83,7 @@
             android:id="@+id/adDetailLocT"
             android:layout_width="350dp"
             android:layout_height="43dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="Location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.442"

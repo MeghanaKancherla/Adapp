@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".view.ImagePickerFragment">
 
 
@@ -13,11 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginBottom="12dp"
+        android:background="@drawable/curve_reactangle_night"
         android:text="@string/upload"
         android:textAlignment="center"
         android:textColor="#070707"
         android:textSize="18sp"
-        android:background="@drawable/curve_reactangle_night"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/selectedUploadImage"
         app:layout_constraintEnd_toEndOf="parent"
