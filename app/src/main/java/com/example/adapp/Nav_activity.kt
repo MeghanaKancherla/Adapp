@@ -31,7 +31,7 @@ class Nav_activity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.home -> {
-                    val allAdsFragment = AllAdsFragment()
+                    val allAdsFragment = All_Ads_Home()
                     setCurrentFragment(allAdsFragment) }
 
                 R.id.myAds ->{
