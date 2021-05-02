@@ -5,6 +5,7 @@
     android:id="@+id/verifyDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".view.VerifyFragment">
 
     <TextView
@@ -65,11 +66,12 @@
 
     <Button
         android:id="@+id/postB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
+        android:layout_width="116dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
         android:text="@string/postadd"
         app:layout_constraintEnd_toEndOf="@+id/locationVerifyET"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/locationVerifyET"
         app:layout_constraintTop_toBottomOf="@+id/locationVerifyET" />
 

@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-16dp">
 
@@ -19,108 +20,118 @@
 
             <Button
                 android:id="@+id/logoutB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_width="103dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="@string/logoutbutton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
 
             <ImageView
                 android:id="@+id/adDetailImg"
                 android:layout_width="164dp"
                 android:layout_height="159dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/username"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 tools:src="@drawable/user_icon" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_width="411dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/curve_reactangle_night"
+                android:backgroundTint="@color/Blue300"
                 android:fontFamily="serif"
                 android:text="@string/accountInfo"
+                android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.461"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/accountUserNameET"
-                android:layout_width="289dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_width="324dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/curve_reactangle_night"
+                android:backgroundTint="@color/Blue300"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/accountUserEmailET"
+                app:layout_constraintStart_toStartOf="@+id/accountUserEmailET"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserEmailET" />
 
             <EditText
                 android:id="@+id/accountUserEmailET"
-                android:layout_width="291dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="324dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/curve_reactangle_night"
+                android:backgroundTint="@color/Blue300"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textWebEmailAddress|textPersonName"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.516"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDetailsB" />
+                app:layout_constraintTop_toBottomOf="@+id/adDetailImg" />
 
             <EditText
                 android:id="@+id/accountUserPhoneET"
-                android:layout_width="291dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_width="324dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/curve_reactangle_night"
+                android:backgroundTint="@color/Blue300"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number|textPhonetic"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/accountUserNameET"
+                app:layout_constraintStart_toStartOf="@+id/accountUserNameET"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserNameET" />
 
             <Button
                 android:id="@+id/cancelB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="122dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginEnd="52dp"
                 android:text="@string/cancelbutton"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toStartOf="@+id/submitB"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/submitB" />
+                app:layout_constraintTop_toBottomOf="@+id/editDetailsB" />
 
             <Button
                 android:id="@+id/submitB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_width="115dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="60dp"
                 android:text="@string/savechangesbutton"
                 android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cancelB"
-                app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
+                app:layout_constraintTop_toBottomOf="@+id/logoutB" />
 
             <ProgressBar
                 android:id="@+id/accountPB"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="60dp"
                 android:indeterminate="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,14 +142,15 @@
 
             <Button
                 android:id="@+id/editDetailsB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="136dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
                 android:text="@string/editdetails"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintEnd_toStartOf="@+id/logoutB"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adDetailImg" />
+                app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
