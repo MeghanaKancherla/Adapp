@@ -38,8 +38,7 @@
         android:layout_height="wrap_content"
         android:onClick="addAdvertisement"
         android:src="@drawable/ic_add"
-        app:layout_anchor="@+id/bottomAppBar"
-        app:layout_anchorGravity="top|center">
+        app:layout_anchor="@id/bottomAppBar">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
