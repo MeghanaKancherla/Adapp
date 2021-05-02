@@ -12,11 +12,11 @@
     //choose category
     //content description for image buttons
     <string name="vehicle">vehicle</string>
-    <string name="mobile">vehicle</string>
-    <string name="furniture">vehicle</string>
-    <string name="property">vehicle</string>
-    <string name="electronics">vehicle</string>
-    <string name="other">vehicle</string>
+    <string name="mobile">mobile</string>
+    <string name="furniture">furniture</string>
+    <string name="property">property</string>
+    <string name="electronics">electronics</string>
+    <string name="other">other</string>
     //button string
     <string name="next">N E X T</string>
     //text view
@@ -72,6 +72,7 @@
     <!--    all ads strings-->
     <string name="rupee">₹</string>
     <string name="contact">Phone:</string>
+    <string name="searchLocation">Search for Ads at any location</string>
     
 <!--    strings for categories-->
     <string name="vehicles">VEHICLES</string>
@@ -80,4 +81,6 @@
     <string name="electronic">HOME APPLIANCES</string>
     <string name="properties">PROPERTY</string>
     <string name="others">OTHER</string>
+    <string name="all">ALL</string>
+
 </resources>

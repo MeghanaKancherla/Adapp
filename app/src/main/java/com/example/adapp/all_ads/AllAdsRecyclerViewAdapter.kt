@@ -35,7 +35,9 @@ class AllAdsRecyclerViewAdapter(
         holder.adLocation.setText(item.location)
         //holder.adContactTV.setText(item.contact)
 
-        Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
+        if(item.imageUrl != null) {
+            Glide.with(holder.itemView.context).load(Uri.parse(item.imageUrl)).into(holder.adImage)
+        }
 
         holder.itemView.setOnClickListener {
             listener(item)
