@@ -2,6 +2,7 @@ package com.example.adapp
 
 import android.content.Intent
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.LocationManager
@@ -10,6 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
+import com.example.adapp.presenter.AdCheckPresenter
 import com.example.adapp.view.SignInFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -20,11 +26,28 @@ class MainActivity : AppCompatActivity() {
     private var longi : Double = 77.590591
     lateinit var lManager: LocationManager
     var providerName=""
+    //lateinit var adCheck: AdCheckPresenter
+    lateinit var wManager : WorkManager
+    lateinit var req : WorkRequest
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //adCheck = AdCheckPresenter(this)
+        //adCheck.checkAds()
+        wManager = WorkManager.getInstance(this)
+
+        req = OneTimeWorkRequestBuilder<AdCheckPresenter>()
+                .build()
+
+        wManager.getWorkInfoByIdLiveData(req.id).observe(this, Observer {
+            it?.let {
+
+            }
+        })
+
         getLocation()
         val currentUser= FirebaseAuth.getInstance().currentUser
         if(currentUser==null)
@@ -34,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
         else
         {
+            wManager.enqueue(req)
             finish()
             val intent= Intent(this,Nav_activity::class.java)
             startActivity(intent)

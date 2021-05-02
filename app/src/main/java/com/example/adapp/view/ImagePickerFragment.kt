@@ -33,6 +33,7 @@ import java.io.IOException
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class ImagePickerFragment : Fragment() {
 
@@ -48,7 +49,10 @@ class ImagePickerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            advert = it.getSerializable(ARG_PARAM1) as Advertisement
+            var check = it.getString(ARG_PARAM2)
+            if(check != null) {
+                advert = it.getSerializable(ARG_PARAM1) as Advertisement
+            }
 
             bundle = it.getBundle("adDetails")
         }
@@ -90,10 +94,11 @@ class ImagePickerFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: Advertisement) =
+        fun newInstance(param1: Advertisement, param2: String) =
             ImagePickerFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }
@@ -188,14 +193,14 @@ class ImagePickerFragment : Fragment() {
         }
         else{
             if(changeSelected){
-                val verifyFragment = VerifyFragment.newInstance(img, advert!!)
+                val verifyFragment = VerifyFragment.newInstance(img, advert!!, "yes")
                 activity?.supportFragmentManager?.beginTransaction()
                         ?.replace(R.id.fragment, verifyFragment)
                         ?.addToBackStack(null)
                         ?.commit()
             }
             else{
-                val verifyFragment = VerifyFragment.newInstance(img, advert!!)
+                val verifyFragment = VerifyFragment.newInstance(img, advert!!, "yes")
                 activity?.supportFragmentManager?.beginTransaction()
                         ?.replace(R.id.fragment, verifyFragment)
                         ?.addToBackStack(null)

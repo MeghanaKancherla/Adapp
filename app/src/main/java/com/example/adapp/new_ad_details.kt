@@ -173,7 +173,7 @@ class new_ad_details : Fragment(), AdapterView.OnItemSelectedListener {
                     advert?.description = desc
                     advert?.price = price
                     advert?.brand = item
-                    val imgFrag = ImagePickerFragment.newInstance(advert!!)
+                    val imgFrag = ImagePickerFragment.newInstance(advert!!, "yes")
                     activity?.supportFragmentManager?.beginTransaction()
                             ?.replace(R.id.fragment, imgFrag)
                             ?.addToBackStack(null)
