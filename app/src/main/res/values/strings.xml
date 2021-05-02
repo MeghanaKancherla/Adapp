@@ -6,7 +6,7 @@
     <string name="myAd">My Ad</string>
     <string name="notification">Notification</string>
     <string name="newAd">Add a new advertisement</string>
-    <string name="uploadImg">Upload Image</string>
+    <string name="uploadImg">Upload</string>
     <string name="noInternet">Please check your Connection</string>
 
     //choose category
@@ -46,7 +46,7 @@
     <string name="userLogin"> User Login</string>
     <string name="accountInfo">Account Info</string>
     <string name="upload">Upload Picture</string>
-    <string name="changeupload">Change Picture</string>
+    <string name="changeupload">Reselect</string>
     <string name="verify">Verify Details</string>
     <string name="postadd">Post Add</string>
     <string name="location">Location:</string>

@@ -28,50 +28,54 @@
 
         <TextView
             android:id="@+id/adPriceTV"
-            android:layout_width="131dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="13dp"
+            android:layout_width="88dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="56dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:textColor="@color/black"
+            android:padding="4dp"
+            android:textColor="@color/green"
             app:layout_constraintEnd_toStartOf="@+id/adImageTV"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/adTitleTV" />
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="18dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="23dp"
+            android:layout_width="26dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/rupee"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColor="@color/Blue900"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:drawableTint="@color/navy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adTitleTV" />
 
         <TextView
             android:id="@+id/adContactTV"
-            android:layout_width="129dp"
-            android:layout_height="25dp"
+            android:layout_width="128dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
+            android:padding="4dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/adImageTV"
             app:layout_constraintTop_toBottomOf="@+id/adPriceTV" />
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="22dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="9dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:drawableStart="@android:drawable/stat_sys_phone_call"
             android:textColor="@color/black"
+            app:drawableTint="@color/navy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -84,6 +88,7 @@
             android:layout_marginEnd="9dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
+            android:padding="4dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/adImageTV"
@@ -98,18 +103,34 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue200"
+            android:padding="6dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adImageTV" />
 
         <TextView
             android:id="@+id/adLocationTV"
-            android:layout_width="362dp"
+            android:layout_width="312dp"
             android:layout_height="38dp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="18dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue200"
+            android:padding="6dp"
+            android:textColor="#ED9C9C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/adDescriptionTV" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="13dp"
+            android:drawableStart="@android:drawable/ic_dialog_map"
+            app:drawableTint="#162B57"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adDescriptionTV" />
     </androidx.constraintlayout.widget.ConstraintLayout>
