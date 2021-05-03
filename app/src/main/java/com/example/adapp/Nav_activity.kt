@@ -35,6 +35,10 @@ class Nav_activity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.home -> {
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val allAdsFragment = AllAdsFragment()
                         setCurrentFragment(allAdsFragment)
@@ -48,6 +52,10 @@ class Nav_activity : AppCompatActivity() {
 
 
                 R.id.myAds ->{
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val myAdsFragment = MyAdsFragment()
                         setCurrentFragment(myAdsFragment)
@@ -60,6 +68,10 @@ class Nav_activity : AppCompatActivity() {
 
                 }
                 R.id.account ->{
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val myAccountFragment = MyAccountFragment()
                         setCurrentFragment(myAccountFragment)
@@ -72,6 +84,10 @@ class Nav_activity : AppCompatActivity() {
 
                 }
                 R.id.notifications ->{
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val notificationFragment = NotificationFragment()
                         setCurrentFragment(notificationFragment)
@@ -95,6 +111,7 @@ class Nav_activity : AppCompatActivity() {
             commit()
         }
     fun addAdvertisement(view:View){
+        fab.visibility=View.INVISIBLE
         val newAdFragment = New_ad_home()
         setCurrentFragment(newAdFragment)
     }

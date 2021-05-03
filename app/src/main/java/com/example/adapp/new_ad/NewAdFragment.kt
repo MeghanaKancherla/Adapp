@@ -14,6 +14,7 @@ import com.example.adapp.R
 import androidx.navigation.fragment.findNavController
 import com.example.adapp.model.Advertisement
 import com.example.adapp.new_ad_details
+import kotlinx.android.synthetic.main.activity_bottom__navigation_.*
 
 import kotlinx.android.synthetic.main.fragment_new_ad.*
 
@@ -38,6 +39,7 @@ class NewAdFragment : Fragment() {
         }
 
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
