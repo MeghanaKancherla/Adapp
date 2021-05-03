@@ -31,8 +31,12 @@ class AllAdsRecyclerViewAdapter(
         val item = values[position]
         holder.adTitle.setText(item.title)
         //holder.adDescription.setText(item.description)
-        holder.adPrice.setText((item.price.toString()))
-        holder.adLocation.setText(item.location)
+        holder.adPrice.setText("₹ ${item.price.toString()}")
+        val location=item.location
+        val split=location!!.split(",")
+        val size=split.size
+        val locationString=split[size-3]+split[size-2]
+        holder.adLocation.setText(locationString)
         //holder.adContactTV.setText(item.contact)
 
         if(item.imageUrl != null) {

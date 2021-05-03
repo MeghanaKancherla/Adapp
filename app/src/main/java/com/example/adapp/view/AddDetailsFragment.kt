@@ -41,7 +41,7 @@ class AddDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adDetailsTitleT.text = ad?.title
-        adDetailPriceT.text = ad?.price
+        adDetailPriceT.text = "₹ ${ad?.price}"
         adDetailDescT.text = ad?.description
         adDetailLocT.text = ad?.location
 
