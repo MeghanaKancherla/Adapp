@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_verify.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM3 = "param3"
 
 /**
  * A simple [Fragment] subclass.
@@ -45,8 +46,11 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imgUri = it.getSerializable(ARG_PARAM1) as Image
-            ad = it.getSerializable(ARG_PARAM2) as Advertisement
+            var check = it.getString(ARG_PARAM3)
+            if(check != null) {
+                imgUri = it.getSerializable(ARG_PARAM1) as Image
+                ad = it.getSerializable(ARG_PARAM2) as Advertisement
+            }
 
             if(ad == null) {
                 adBundle = it.getBundle("adBundle")
@@ -117,11 +121,12 @@ class VerifyFragment : Fragment(), FirebaseCallback, MyAcountDataPresenter.View,
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Image, param2: Advertisement) =
+        fun newInstance(param1: Image, param2: Advertisement, param3: String) =
             VerifyFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
                     putSerializable(ARG_PARAM2, param2)
+                    putString(ARG_PARAM3, param3)
                 }
             }
     }

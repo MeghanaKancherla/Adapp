@@ -31,7 +31,7 @@ class MyAdsRecyclerViewAdapter(
         val item = values[position]
         holder.adTitle.setText(item.title)
         holder.adDescription.setText(item.description)
-        holder.adPrice.text = (item.price.toString())
+        holder.adPrice.text = ("₹ ${item.price.toString()}")
         holder.adLocation.text = (item.location)
         holder.adContactTV.text = (item.contact)
 

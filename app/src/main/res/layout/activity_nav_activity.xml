@@ -11,7 +11,8 @@
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="641dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
         tools:layout="@layout/fragment_item_all_ads" />
 
     <com.google.android.material.bottomappbar.BottomAppBar

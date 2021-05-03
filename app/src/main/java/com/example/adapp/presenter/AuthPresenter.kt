@@ -86,7 +86,6 @@ class AuthPresenter(val view: View){
     fun updateData(changedPhoneNumber: String, changedUserName: String, imgUri: Uri?) {
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user.uid
-        
         if(imgUri == null) {
             val databaseRef = FirebaseDatabase.getInstance()
                 .getReference("Users").child(uid)

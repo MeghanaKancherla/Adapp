@@ -45,7 +45,9 @@ class AddDetailsFragment : Fragment() {
         adDetailDescT.text = ad?.description
         adDetailLocT.text = ad?.location
 
-        Glide.with(view.context).load(Uri.parse(ad?.imageUrl)).into(adDetailImg)
+        if(ad?.imageUrl != null) {
+            Glide.with(view.context).load(Uri.parse(ad?.imageUrl)).into(adDetailImg)
+        }
     }
     companion object {
         /**

@@ -45,7 +45,7 @@
 
     <Button
         android:id="@+id/registerB"
-        android:layout_width="157dp"
+        android:layout_width="130dp"
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:text="@string/register"
@@ -105,10 +105,9 @@
 
     <ImageView
         android:id="@+id/uploadProfilePicture"
-        android:layout_width="162dp"
-        android:layout_height="141dp"
+        android:layout_width="74dp"
+        android:layout_height="84dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/circle_user"
         android:src="@drawable/upload_arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
