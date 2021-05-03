@@ -1,5 +1,6 @@
 package com.example.adapp.all_ads
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.replace
@@ -18,6 +20,7 @@ import com.example.adapp.model.Advertisement
 import com.example.adapp.presenter.AdDisplayPresenter
 import com.example.adapp.presenter.RetrieveAdsCallback
 import com.example.adapp.view.AddDetailsFragment
+import com.example.adapp.view.AllAdsCategoryAdapter
 import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.android.synthetic.main.fragment_item_all_ads.*
 
@@ -70,28 +73,10 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
         super.onViewCreated(view, savedInstanceState)
         searchView.setOnQueryTextListener(this)
 
-        mobB.setOnClickListener {
-            filterList("mobile")
-        }
-
-        vehicleB.setOnClickListener {
-            filterList("vehicle")
-        }
-
-        propertyB.setOnClickListener {
-            filterList("property")
-        }
-
-        electronicB.setOnClickListener {
-            filterList("electronic")
-        }
-
-        furnitureB.setOnClickListener {
-            filterList("furniture")
-        }
-
-        allB.setOnClickListener {
-            filterList("all")
+        val catArray = resources.getStringArray(R.array.categories)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = AllAdsCategoryAdapter(catArray){
+            filterList(it)
         }
     }
 

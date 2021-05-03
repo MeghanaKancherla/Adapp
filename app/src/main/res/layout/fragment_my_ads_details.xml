@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".my_ads.MyAdsDetails">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="578dp"
         android:background="@drawable/gradient_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -31,8 +31,8 @@
 
             <ImageView
                 android:id="@+id/adDetailsIV"
-                android:layout_width="269dp"
-                android:layout_height="297dp"
+                android:layout_width="275dp"
+                android:layout_height="288dp"
                 android:layout_marginTop="8dp"
                 android:src="@android:drawable/btn_star_big_on"
                 app:layout_constraintEnd_toEndOf="parent"
