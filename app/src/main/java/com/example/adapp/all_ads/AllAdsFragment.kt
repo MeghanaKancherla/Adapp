@@ -50,7 +50,7 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
 
         rView = view.findViewById(R.id.myAdsList)
         //rView.layoutManager = LinearLayoutManager(context)
-        rView.layoutManager = GridLayoutManager(context,2)
+        rView.layoutManager = GridLayoutManager(context,1)
         // Set the adapter
 //        if (view is RecyclerView) {
 //            with(view) {

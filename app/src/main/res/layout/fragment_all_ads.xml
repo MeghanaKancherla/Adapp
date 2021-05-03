@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/allAdCard"
     android:layout_width="match_parent"
-    android:layout_height="330dp"
+    android:layout_height="300dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
     android:padding="@dimen/padding"
@@ -14,82 +14,69 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ad"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_height="285dp"
         android:background="@drawable/gradient_background">
 
         <TextView
             android:id="@+id/TitleTV"
-            android:layout_width="152dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:padding="4dp"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/PriceTV"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ImageIV"
-            android:layout_width="216dp"
-            android:layout_height="262dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="23dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="213dp"
+            android:layout_height="164dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/TitleTV"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TitleTV"
             app:srcCompat="@android:drawable/btn_star_big_on" />
 
         <TextView
             android:id="@+id/PriceTV"
-            android:layout_width="103dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:padding="4dp"
+            android:padding="10dp"
             android:textColor="@color/green"
-            app:layout_constraintEnd_toStartOf="@+id/ImageIV"
-            app:layout_constraintTop_toBottomOf="@+id/TitleTV" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TitleTV"
+            app:layout_constraintTop_toTopOf="@+id/TitleTV" />
 
         <TextView
             android:id="@+id/LocationTV"
-            android:layout_width="147dp"
-            android:layout_height="140dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="31dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
+            android:gravity="center"
             android:padding="4dp"
             android:textColor="@color/black"
-            android:textStyle="bold|italic"
+            android:textStyle="italic"
             app:drawableStartCompat="@android:drawable/ic_dialog_map"
             app:drawableTint="@color/navy"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ImageIV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PriceTV" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="28dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="17dp"
-            android:text="@string/rupee"
-            android:textColor="@color/navy"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/PriceTV"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleTV" />
+            app:layout_constraintTop_toBottomOf="@+id/ImageIV"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

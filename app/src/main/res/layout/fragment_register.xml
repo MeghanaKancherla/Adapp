@@ -10,12 +10,14 @@
 
     <EditText
         android:id="@+id/usernameRegisterET"
-        android:layout_width="328dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
         android:autofillHints=""
         android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/backgroundTint"
+        android:backgroundTint="@color/Blue300"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -27,11 +29,11 @@
 
     <EditText
         android:id="@+id/passwordRegisterET"
-        android:layout_width="325dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/backgroundTint"
+        android:backgroundTint="@color/Blue300"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -43,7 +45,7 @@
 
     <Button
         android:id="@+id/registerB"
-        android:layout_width="157dp"
+        android:layout_width="130dp"
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:text="@string/register"
@@ -55,11 +57,11 @@
 
     <EditText
         android:id="@+id/rePasswordRegisterET"
-        android:layout_width="323dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/backgroundTint"
+        android:backgroundTint="@color/Blue300"
         android:ems="10"
         android:hint="@string/cpassword"
         android:inputType="textPassword"
@@ -71,14 +73,14 @@
 
     <EditText
         android:id="@+id/phoneRegisterET"
-        android:layout_width="321dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/backgroundTint"
+        android:backgroundTint="@color/Blue300"
         android:ems="10"
         android:hint="@string/phonenumber"
-        android:inputType="textPersonName"
+        android:inputType="numberSigned|textPersonName"
         android:padding="6dp"
         app:layout_constraintEnd_toEndOf="@+id/rePasswordRegisterET"
         app:layout_constraintHorizontal_bias="0.0"
@@ -87,11 +89,11 @@
 
     <EditText
         android:id="@+id/emailRegisterET"
-        android:layout_width="327dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/backgroundTint"
+        android:backgroundTint="@color/Blue300"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -103,10 +105,9 @@
 
     <ImageView
         android:id="@+id/uploadProfilePicture"
-        android:layout_width="162dp"
-        android:layout_height="141dp"
-        android:layout_marginTop="37dp"
-        android:background="@drawable/circle_user"
+        android:layout_width="74dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/upload_arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
