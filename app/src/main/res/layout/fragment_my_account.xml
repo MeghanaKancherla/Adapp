@@ -23,29 +23,30 @@
                 android:layout_width="103dp"
                 android:layout_height="44dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="60dp"
                 android:text="@string/logoutbutton"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
 
             <ImageView
                 android:id="@+id/adDetailImg"
-                android:layout_width="164dp"
-                android:layout_height="159dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="24dp"
                 android:contentDescription="@string/username"
                 android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView2"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 tools:src="@drawable/user_icon" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="411dp"
+                android:layout_width="0dp"
                 android:layout_height="25dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/curve_reactangle_night"
                 android:backgroundTint="@color/Blue300"
                 android:fontFamily="serif"
@@ -58,74 +59,81 @@
 
             <EditText
                 android:id="@+id/accountUserNameET"
-                android:layout_width="324dp"
+                android:layout_width="0dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/curve_reactangle_night"
                 android:backgroundTint="@color/Blue300"
+                android:drawableStart="@drawable/ic_account"
+                android:drawablePadding="6dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/accountUserEmailET"
+                app:layout_constraintEnd_toStartOf="@+id/editDetailsB"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/accountUserEmailET"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserEmailET" />
 
             <EditText
                 android:id="@+id/accountUserEmailET"
-                android:layout_width="324dp"
+                android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/curve_reactangle_night"
                 android:backgroundTint="@color/Blue300"
+                android:drawableStart="@android:drawable/sym_action_email"
+                android:drawablePadding="6dp"
                 android:ems="10"
                 android:inputType="textWebEmailAddress|textPersonName"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.516"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailImg" />
 
             <EditText
                 android:id="@+id/accountUserPhoneET"
-                android:layout_width="324dp"
+                android:layout_width="0dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/curve_reactangle_night"
                 android:backgroundTint="@color/Blue300"
+                android:drawableStart="@android:drawable/stat_sys_phone_call"
+                android:drawablePadding="6dp"
                 android:ems="10"
                 android:inputType="number|textPhonetic"
                 android:textColor="#0B0A0A"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/accountUserNameET"
+                app:layout_constraintEnd_toEndOf="@+id/editDetailsB"
                 app:layout_constraintStart_toStartOf="@+id/accountUserNameET"
                 app:layout_constraintTop_toBottomOf="@+id/accountUserNameET" />
-
-            <Button
-                android:id="@+id/cancelB"
-                android:layout_width="122dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="62dp"
-                android:layout_marginEnd="52dp"
-                android:text="@string/cancelbutton"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/submitB"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDetailsB" />
 
             <Button
                 android:id="@+id/submitB"
                 android:layout_width="115dp"
                 android:layout_height="41dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="60dp"
                 android:text="@string/savechangesbutton"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logoutB" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cancelB"
+                app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
+
+            <Button
+                android:id="@+id/cancelB"
+                android:layout_width="122dp"
+                android:layout_height="44dp"
+                android:text="@string/cancelbutton"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/submitB"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/submitB" />
 
             <ProgressBar
                 android:id="@+id/accountPB"
@@ -140,17 +148,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.641" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/editDetailsB"
-                android:layout_width="136dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="50dp"
-                android:text="@string/editdetails"
-                app:layout_constraintEnd_toStartOf="@+id/logoutB"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accountUserPhoneET" />
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/curve_reactangle_night"
+                android:backgroundTint="@color/navy"
+                android:src="@android:drawable/ic_menu_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/accountUserNameET" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
