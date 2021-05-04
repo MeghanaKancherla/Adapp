@@ -18,7 +18,7 @@ import com.example.adapp.model.Advertisement
  */
 class AllAdsRecyclerViewAdapter(
     private val values: List<Advertisement>,
-    val listener: (Advertisement) -> Unit
+    val listener: (Advertisement, Int) -> Unit
 ) : RecyclerView.Adapter<AllAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,7 +44,11 @@ class AllAdsRecyclerViewAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            listener(item)
+            listener(item, 0)
+        }
+
+        holder.subscribeImage.setOnClickListener {
+            listener(item, 1)
         }
     }
 
@@ -57,6 +61,7 @@ class AllAdsRecyclerViewAdapter(
         //val adDescription: TextView = view.findViewById(R.id.adDescriptionTV)
         //val adContactTV: TextView = view.findViewById(R.id.adContactTV)
         val adImage:ImageView=view.findViewById(R.id.ImageIV)
+        val subscribeImage: ImageView = view.findViewById(R.id.subscribeB)
 
     }
 }
