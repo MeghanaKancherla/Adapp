@@ -49,12 +49,12 @@ class MyAdsDetails : Fragment(), ModifyAdPresenter.View {
 
         adDetailsProgressB.visibility = View.INVISIBLE
         adDetailsTitleTV.text = myAd?.title
-        adDetailsPriceTV.text = myAd?.price
-        adDetailsCategoryTV.text = myAd?.category
-        adDetailsBrandTV.text = myAd?.brand
-        adDetailsDescriptionTV.text = myAd?.description
-        adDetailsLocationTV.text = myAd?.location
-        adDetailsContactTV.text = myAd?.contact
+        adDetailsPriceTV.append(" ${myAd?.price}")
+        adDetailsCategoryTV.append(" ${myAd?.category}")
+        adDetailsBrandTV.append(" ${myAd?.brand}")
+        adDetailsDescriptionTV.append(" ${myAd?.description}")
+        adDetailsLocationTV.append(" ${myAd?.location}")
+        adDetailsContactTV.append(" ${myAd?.contact}")
 
         Glide.with(view.context).load(Uri.parse(myAd?.imageUrl)).into(adDetailsIV)
 
