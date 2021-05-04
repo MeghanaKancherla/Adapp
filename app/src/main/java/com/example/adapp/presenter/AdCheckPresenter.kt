@@ -24,7 +24,7 @@ class AdCheckPresenter(val context: Context, params: WorkerParameters) : Worker(
 
     fun checkUserCategory() {
         if(user != null) {
-            var userId = user.uid
+            val userId = user.uid
             FirebaseDatabase.getInstance().getReference("Users").child(userId).child("category").get().addOnCompleteListener {
                 val result = it.result
                 result.let {
