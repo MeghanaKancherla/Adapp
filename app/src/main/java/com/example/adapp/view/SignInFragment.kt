@@ -82,7 +82,7 @@ class SignInFragment : Fragment(),AuthPresenter.View {
 
         newUser.setOnClickListener {
             val regFrag=RegisterFragment()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.parentL,regFrag).commit()
+            requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.parentL,regFrag).commit()
         }
         forgotPasswordTV.setOnClickListener {
             startActivity(Intent(requireActivity(),ForgotPasswordActivity::class.java))

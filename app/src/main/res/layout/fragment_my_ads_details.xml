@@ -129,9 +129,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/curve_reactangle_night"
-                android:backgroundTint="@color/Blue200"
+                android:backgroundTint="@color/Blue300"
                 android:padding="@dimen/padding"
                 android:text="@string/Detailsdescription"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/adDetailsContactTV"
                 app:layout_constraintStart_toStartOf="@+id/adDetailsContactTV"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsContactTV" />
