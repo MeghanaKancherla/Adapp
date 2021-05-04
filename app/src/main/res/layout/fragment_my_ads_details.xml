@@ -98,7 +98,7 @@
             <TextView
                 android:id="@+id/adDetailsLocationTV"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/detailsTextView"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/curve_reactangle_night"
                 android:backgroundTint="@color/Blue300"
@@ -125,37 +125,38 @@
 
             <TextView
                 android:id="@+id/adDetailsDescriptionTV"
-                android:layout_width="382dp"
-                android:layout_height="58dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/curve_reactangle_night"
-                android:backgroundTint="@color/Blue200"
+                android:backgroundTint="@color/Blue300"
                 android:padding="@dimen/padding"
                 android:text="@string/Detailsdescription"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/adDetailsContactTV"
                 app:layout_constraintStart_toStartOf="@+id/adDetailsContactTV"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsContactTV" />
 
             <Button
                 android:id="@+id/adDetailsDeleteB"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="78dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="79dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="50dp"
                 android:text="@string/DetailsDeleteButton"
                 app:layout_constraintEnd_toStartOf="@+id/adDetailsEditB"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/adDetailsDescriptionTV"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsDescriptionTV" />
 
             <Button
                 android:id="@+id/adDetailsEditB"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="78dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/DetailsEditButton"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/adDetailsDescriptionTV"
+                app:layout_constraintStart_toEndOf="@+id/adDetailsDeleteB"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsDescriptionTV" />
 
             <ProgressBar

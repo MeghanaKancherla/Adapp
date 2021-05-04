@@ -8,6 +8,7 @@
     <string name="newAd">Add a new advertisement</string>
     <string name="uploadImg">Upload</string>
     <string name="noInternet">Please check your Connection</string>
+    <string name="noAds">No Ads Found</string>
 
     //choose category
     //content description for image buttons

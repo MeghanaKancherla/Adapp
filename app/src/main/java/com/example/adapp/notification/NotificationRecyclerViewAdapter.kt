@@ -29,7 +29,7 @@ class NotificationRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = item.title
-        holder.contentView.text = item.price
+        holder.contentView.text = "₹ ${item.price}"
         holder.categoryView.text = item.category
 
         holder.itemView.setOnClickListener {
