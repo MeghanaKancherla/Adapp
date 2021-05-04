@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".Nav_activity">
 
 
@@ -11,15 +12,16 @@
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="641dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
         tools:layout="@layout/fragment_item_all_ads" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fabCradleMargin="20dp"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="20dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

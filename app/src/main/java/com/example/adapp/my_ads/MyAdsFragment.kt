@@ -51,7 +51,7 @@ class MyAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback {
                     else -> GridLayoutManager(context, columnCount)
                 }*/
                 rList = view
-                layoutManager=GridLayoutManager(context,2)
+                layoutManager=GridLayoutManager(context,1)
                 //adapter = MyAdsRecyclerViewAdapter(adsList)
             }
         }

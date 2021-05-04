@@ -35,6 +35,12 @@ class Nav_activity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.home -> {
+                    bottomNavigationView.getMenu().setGroupCheckable(0,true,true)
+
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val allAdsFragment = AllAdsFragment()
                         setCurrentFragment(allAdsFragment)
@@ -48,6 +54,12 @@ class Nav_activity : AppCompatActivity() {
 
 
                 R.id.myAds ->{
+                    bottomNavigationView.getMenu().setGroupCheckable(0,true,true)
+
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val myAdsFragment = MyAdsFragment()
                         setCurrentFragment(myAdsFragment)
@@ -60,6 +72,12 @@ class Nav_activity : AppCompatActivity() {
 
                 }
                 R.id.account ->{
+                    bottomNavigationView.getMenu().setGroupCheckable(0,true,true)
+
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val myAccountFragment = MyAccountFragment()
                         setCurrentFragment(myAccountFragment)
@@ -72,6 +90,12 @@ class Nav_activity : AppCompatActivity() {
 
                 }
                 R.id.notifications ->{
+                    bottomNavigationView.getMenu().setGroupCheckable(0,true,true)
+
+                    if(fab.visibility==View.INVISIBLE)
+                    {
+                        fab.visibility=View.VISIBLE
+                    }
                     if (isOnline) {
                         val notificationFragment = NotificationFragment()
                         setCurrentFragment(notificationFragment)
@@ -95,6 +119,9 @@ class Nav_activity : AppCompatActivity() {
             commit()
         }
     fun addAdvertisement(view:View){
+        bottomNavigationView.getMenu().setGroupCheckable(0,false,true)
+
+        fab.visibility=View.INVISIBLE
         val newAdFragment = New_ad_home()
         setCurrentFragment(newAdFragment)
     }

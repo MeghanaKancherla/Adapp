@@ -18,7 +18,7 @@ import com.example.adapp.model.Advertisement
  */
 class AllAdsRecyclerViewAdapter(
     private val values: List<Advertisement>,
-    val listener: (Advertisement) -> Unit
+    val listener: (Advertisement, Int) -> Unit
 ) : RecyclerView.Adapter<AllAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,8 +31,12 @@ class AllAdsRecyclerViewAdapter(
         val item = values[position]
         holder.adTitle.setText(item.title)
         //holder.adDescription.setText(item.description)
-        holder.adPrice.setText((item.price.toString()))
-        holder.adLocation.setText(item.location)
+        holder.adPrice.setText("₹ ${item.price.toString()}")
+        val location=item.location
+        val split=location!!.split(",")
+        val size=split.size
+        val locationString=split[size-3]+split[size-2]
+        holder.adLocation.setText(locationString)
         //holder.adContactTV.setText(item.contact)
 
         if(item.imageUrl != null) {
@@ -40,7 +44,11 @@ class AllAdsRecyclerViewAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            listener(item)
+            listener(item, 0)
+        }
+
+        holder.subscribeImage.setOnClickListener {
+            listener(item, 1)
         }
     }
 
@@ -53,6 +61,7 @@ class AllAdsRecyclerViewAdapter(
         //val adDescription: TextView = view.findViewById(R.id.adDescriptionTV)
         //val adContactTV: TextView = view.findViewById(R.id.adContactTV)
         val adImage:ImageView=view.findViewById(R.id.ImageIV)
+        val subscribeImage: ImageView = view.findViewById(R.id.subscribeB)
 
     }
 }
