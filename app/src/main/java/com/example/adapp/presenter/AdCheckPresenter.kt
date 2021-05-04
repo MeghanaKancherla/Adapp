@@ -105,6 +105,12 @@ class AdCheckPresenter(val context: Context, params: WorkerParameters) : Worker(
         notifyRef.child(user.uid).push().setValue(ad)
     }
 
+    private fun isOnline(): Boolean {
+        val connectivityManager = context.getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=connectivityManager.activeNetworkInfo
+        return networkInfo?.isConnected==true
+    }
+
     override fun doWork(): Result {
         checkUserCategory()
         return Result.success()
