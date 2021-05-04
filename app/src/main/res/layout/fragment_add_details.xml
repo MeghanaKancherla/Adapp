@@ -22,10 +22,9 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:fontFamily="@font/podkova_bold"
             android:text="@string/add_details"
             android:textAlignment="center"
-            android:textColor="@color/dark_blue"
+            android:textColor="#171616"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +49,8 @@
             android:layout_marginEnd="25dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:fontFamily="@font/comfortaa_bold"
             android:padding="@dimen/padding"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/adDetailPriceT"
@@ -67,10 +65,10 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:fontFamily="@font/comfortaa_bold"
+            android:drawablePadding="6dp"
             android:padding="@dimen/padding"
             android:text="@string/rupee"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/pinkRed"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
@@ -86,12 +84,12 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
-            android:fontFamily="@font/comfortaa"
             android:padding="@dimen/padding"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/adDetailImg"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/adDetailImg"
-            app:layout_constraintTop_toBottomOf="@+id/adDetailImg" />
+            app:layout_constraintTop_toBottomOf="@+id/adDetailContactT" />
 
         <TextView
             android:id="@+id/adDetailLocT"
@@ -101,15 +99,55 @@
             android:background="@drawable/curve_reactangle_night"
             android:backgroundTint="@color/Blue300"
             android:drawablePadding="6dp"
-            android:fontFamily="@font/comfortaa"
             android:padding="@dimen/padding"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/black"
             app:drawableStartCompat="@android:drawable/ic_dialog_map"
             app:drawableTint="@color/navy"
             app:layout_constraintEnd_toEndOf="@+id/adDetailDescT"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/adDetailDescT"
             app:layout_constraintTop_toBottomOf="@+id/adDetailDescT" />
+
+        <TextView
+            android:id="@+id/adDetailContactT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/curve_reactangle_night"
+            android:backgroundTint="@color/Blue300"
+            android:drawableStart="@android:drawable/stat_sys_phone_call"
+            android:drawablePadding="@dimen/padding"
+            android:padding="@dimen/padding"
+            android:textColor="@color/black"
+            app:drawableTint="@color/navy"
+            app:layout_constraintEnd_toStartOf="@+id/adMessageContact"
+            app:layout_constraintStart_toStartOf="@+id/adDetailImg"
+            app:layout_constraintTop_toBottomOf="@+id/adDetailImg" />
+
+        <ImageButton
+            android:id="@+id/adCallContact"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/curve_reactangle_night"
+            android:backgroundTint="@color/navy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/adMessageContact"
+            app:srcCompat="@android:drawable/stat_sys_phone_call_forward" />
+
+        <ImageButton
+            android:id="@+id/adMessageContact"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/curve_reactangle_night"
+            android:backgroundTint="@color/Blue900"
+            app:layout_constraintEnd_toStartOf="@+id/adCallContact"
+            app:layout_constraintTop_toTopOf="@+id/adDetailContactT"
+            app:srcCompat="@android:drawable/ic_menu_send" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
