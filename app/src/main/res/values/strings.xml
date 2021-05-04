@@ -45,9 +45,9 @@
     <string name="Registration"> User Registration</string>
     <string name="userLogin"> L O G I N</string>
     <string name="accountInfo">ACCOUNT  INFO</string>
-    <string name="upload">Upload Picture</string>
+    <string name="upload">UPLOAD  IMAGE</string>
     <string name="changeupload">Reselect</string>
-    <string name="verify">Verify Details</string>
+    <string name="verify">VERIFY DETAILS</string>
     <string name="postadd">Post Add</string>
     <string name="location">Location:</string>
     <string name="ad_details">Ad Details</string>
