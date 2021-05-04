@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="411dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myAdsList"
+        android:id="@+id/rView"
         android:name="com.example.adapp.AllAdsFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

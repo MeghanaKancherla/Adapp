@@ -81,6 +81,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
 
 
         editDetailsB.setOnClickListener{
+            editDetailsB.visibility=View.INVISIBLE
             accountUserNameET.isEnabled=true
             accountUserPhoneET.isEnabled=true
             cancelB.visibility=View.VISIBLE
@@ -112,6 +113,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
             submitB.visibility=View.INVISIBLE
             cancelB.visibility=View.INVISIBLE
             logoutB.visibility=View.VISIBLE
+            editDetailsB.visibility=View.VISIBLE
 
 
 
@@ -124,6 +126,7 @@ class MyAccountFragment : Fragment(),MyAcountDataPresenter.View,FirebaseCallback
             submitB.visibility=View.INVISIBLE
             cancelB.visibility=View.INVISIBLE
             logoutB.visibility=View.VISIBLE
+            editDetailsB.visibility=View.VISIBLE
 
 
         }

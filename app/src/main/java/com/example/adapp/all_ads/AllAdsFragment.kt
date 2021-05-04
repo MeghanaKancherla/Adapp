@@ -1,6 +1,5 @@
 package com.example.adapp.all_ads
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,30 +9,29 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.replace
 import com.example.adapp.R
 import com.example.adapp.model.Ad_response
 import com.example.adapp.model.Advertisement
 import com.example.adapp.presenter.AdDisplayPresenter
+import com.example.adapp.presenter.AddSubscribePresenter
 import com.example.adapp.presenter.RetrieveAdsCallback
 import com.example.adapp.view.AddDetailsFragment
 import com.example.adapp.view.AllAdsCategoryAdapter
-import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.android.synthetic.main.fragment_item_all_ads.*
 
 /**
  * A fragment representing a list of Items.
  */
-class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback, SearchView.OnQueryTextListener {
+class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback, SearchView.OnQueryTextListener, AddSubscribePresenter.View {
 
     private var columnCount = 1
     lateinit var displayPresenter: AdDisplayPresenter
     var listOfAds = listOf<Advertisement>()
     lateinit var rView : RecyclerView
     var selectedFilter = "all"
+    lateinit var addSubscribePresenter: AddSubscribePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +41,7 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
         }
         displayPresenter = AdDisplayPresenter(this)
         displayPresenter.getAllAds(this)
+        addSubscribePresenter = AddSubscribePresenter(this)
     }
 
     override fun onCreateView(
@@ -51,7 +50,7 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_all_ads, container, false)
 
-        rView = view.findViewById(R.id.myAdsList)
+        rView = view.findViewById(R.id.rView)
         //rView.layoutManager = LinearLayoutManager(context)
         rView.layoutManager = GridLayoutManager(context,1)
         // Set the adapter
@@ -101,12 +100,17 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
 
     override fun onResponse(response: Ad_response) {
         listOfAds = response.listOfAds!!
-        rView.adapter = AllAdsRecyclerViewAdapter(listOfAds){
-            val adFragment = AddDetailsFragment.newInstance(it)
-            activity?.supportFragmentManager?.beginTransaction()
+        rView.adapter = AllAdsRecyclerViewAdapter(listOfAds){ advert, flag ->
+            if(flag == 0) {
+                val adFragment = AddDetailsFragment.newInstance(advert)
+                activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment, adFragment)
                     ?.addToBackStack(null)
                     ?.commit()
+            }
+            else{
+                addSubscribePresenter.addSubscribe(advert.category!!)
+            }
         }
         rView.adapter?.notifyDataSetChanged()
     }
@@ -126,12 +130,17 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
             }
         }
         Log.d("AllAds", "$filteredAdList")
-        rView.adapter = AllAdsRecyclerViewAdapter(filteredAdList){
-            val adFragment = AddDetailsFragment.newInstance(it)
-            activity?.supportFragmentManager?.beginTransaction()
+        rView.adapter = AllAdsRecyclerViewAdapter(filteredAdList){ advert, flag ->
+            if(flag == 0) {
+                val adFragment = AddDetailsFragment.newInstance(advert)
+                activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment, adFragment)
                     ?.addToBackStack(null)
                     ?.commit()
+            }
+            else{
+                addSubscribePresenter.addSubscribe(advert.category!!)
+            }
         }
         return false
     }
@@ -150,12 +159,17 @@ class AllAdsFragment : Fragment(), AdDisplayPresenter.View, RetrieveAdsCallback,
                 filteredAdList = listOfAds.toMutableList()
             }
         }
-        rView.adapter = AllAdsRecyclerViewAdapter(filteredAdList){
-            val adFragment = AddDetailsFragment.newInstance(it)
-            activity?.supportFragmentManager?.beginTransaction()
+        rView.adapter = AllAdsRecyclerViewAdapter(filteredAdList){ advert, flag ->
+            if(flag == 0) {
+                val adFragment = AddDetailsFragment.newInstance(advert)
+                activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment, adFragment)
                     ?.addToBackStack(null)
                     ?.commit()
+            }
+            else{
+                addSubscribePresenter.addSubscribe(advert.category!!)
+            }
         }
     }
 }
