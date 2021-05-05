@@ -43,4 +43,13 @@
     <string-array name="other_brand">
         <item>Other</item>
     </string-array>
+
+    <string-array name="categories">
+        <item>mobile</item>
+        <item>vehicle</item>
+        <item>furniture</item>
+        <item>properties</item>
+        <item>electronics</item>
+        <item>all</item>
+    </string-array>
 </resources>
