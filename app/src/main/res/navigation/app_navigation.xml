@@ -6,7 +6,7 @@
     app:startDestination="@id/newAdFragment">
     <fragment
         android:id="@+id/newAdFragment"
-        android:name="com.example.adapp.new_ad.NewAdFragment"
+        android:name="com.example.adapp.view.new_ad.NewAdFragment"
         android:label="fragment_new_ad"
         tools:layout="@layout/fragment_new_ad" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/new_ad_details"
-        android:name="com.example.adapp.new_ad_details"
+        android:name="com.example.adapp.view.new_ad_details"
         android:label="fragment_new_ad_details"
         tools:layout="@layout/fragment_new_ad_details" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/verifyFragment"
-        android:name="com.example.adapp.view.VerifyFragment"
+        android:name="com.example.adapp.view.auth.VerifyFragment"
         android:label="fragment_verify"
         tools:layout="@layout/fragment_verify" />
 </navigation>

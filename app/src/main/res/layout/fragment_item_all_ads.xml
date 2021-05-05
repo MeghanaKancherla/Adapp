@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adapp.all_ads.AllAdsFragment">
+    tools:context=".view.all_ads.AllAdsFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        tools:context=".all_ads.AllAdsFragment"
+        tools:context=".view.all_ads.AllAdsFragment"
         tools:listitem="@layout/fragment_all_ads" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

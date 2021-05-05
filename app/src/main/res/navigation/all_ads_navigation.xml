@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/allAdsFragment"
-        android:name="com.example.adapp.all_ads.AllAdsFragment"
+        android:name="com.example.adapp.view.all_ads.AllAdsFragment"
         android:label="fragment_item_all_ads"
         tools:layout="@layout/fragment_item_all_ads" >
         <action

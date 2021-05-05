@@ -1,4 +1,4 @@
-package com.example.adapp.view
+package com.example.adapp.view.auth
 
 import android.Manifest
 import android.content.Context
@@ -7,18 +7,16 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.adapp.R
-import com.example.adapp.model.Advertisement
 import com.example.adapp.model.Image
-import com.example.adapp.view.auth.VerifyFragment
+import com.example.adapp.presenter.AuthPresenter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -26,36 +24,37 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.fragment_image_picker.*
+import kotlinx.android.synthetic.main.fragment_register.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ImagePickerFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ * Use the [LoginFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 
+class RegisterFragment : Fragment(),AuthPresenter.View {
+    // TODO: Rename and change types of parameters
     private val GALLERY : Int = 1
     private  val CAMERA : Int = 2
-    // TODO: Rename and change types of parameters
-    private var advert: Advertisement? = null
-    var bundle : Bundle? = null
-    var imageUri: Uri? = null
-    var img = Image()
-    var changeSelected = false
-
+    private var param1: String? = null
+    private var param2: String? = null
+    lateinit var img: Image
+    lateinit var regPresenter:AuthPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            var check = it.getString(ARG_PARAM2)
-            if(check != null) {
-                advert = it.getSerializable(ARG_PARAM1) as Advertisement
-            }
-
-            bundle = it.getBundle("adDetails")
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
         }
+        regPresenter= AuthPresenter(this)
+        img = Image()
     }
 
     override fun onCreateView(
@@ -63,44 +62,106 @@ class ImagePickerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_image_picker, container, false)
+        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        requestMultiplePermissions()
-        if(advert != null){
-            uploadImgB.visibility = View.VISIBLE
-            Glide.with(view.context).load(Uri.parse(advert?.imageUrl)).into(selectedUploadImage)
-            changeUploadButton?.setOnClickListener{
-                showPictureDialog()
-                changeSelected = true
-            }
-            uploadImgB.setOnClickListener {
-                nextFragmentNavigation()
-            }
-        }
-        else {
-            uploadImgB.visibility = View.INVISIBLE
-
+        uploadProfilePicture.setOnClickListener {
+            requestMultiplePermissions()
             showPictureDialog()
-
-            changeUploadButton?.setOnClickListener({ showPictureDialog() })
-
-            super.onViewCreated(view, savedInstanceState)
         }
+        registerB.setOnClickListener {
+            val username = usernameRegisterET.text.toString()
+            val email = emailRegisterET.text.toString()
+            val password = passwordRegisterET.text.toString()
+            val confirmPassword = rePasswordRegisterET.text.toString()
+            val phoneNo = phoneRegisterET.text.toString()
+            val isMailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            if(username.isNotEmpty() && email.isNotEmpty()
+                && password.isNotEmpty() && confirmPassword.isNotEmpty()
+                &&phoneNo.isNotEmpty())
+            {
+                if(password != confirmPassword)
+                {
+                    Toast.makeText(requireActivity(),"Password and confirm Password Doesn't match!",Toast.LENGTH_SHORT).show()
+                }
+                else if(password.length < 8)
+                {
+                    passwordRegisterET.setError("Password should have minimum 8 characters")
+                }
+                else if(!isMailValid)
+                {
+                    emailRegisterET.setError("Enter a valid Email!")
+                }
+                else if(phoneNo.length != 10)
+                {
+                    phoneRegisterET.setError("Enter a valid Phone Number!")
+                }
+                else
+                {
+                    var isCreated = false
+                    if(img.imgUri != null) {
+                        isCreated = regPresenter.createAccount(username, email, password, phoneNo, img.imgUri!!)
+                    }
+                    else{
+                        img.imgUri = null
+                        isCreated = regPresenter.createAccount(username, email, password, phoneNo, img.imgUri)
+                    }
+                    if(isCreated)
+                    {
+                        Toast.makeText(activity,"Registration Done Successfully.. login to continue", Toast.LENGTH_SHORT).show()
+                        val loginFrag= SignInFragment()
+                        requireActivity().supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.parentL,loginFrag)
+                            .commit()
+                    }
+                    else
+                    {
+                        Toast.makeText(activity,"Registration Failed", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+            else
+            {
+                Toast.makeText(requireActivity(),"Enter all the fields!",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {
-
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment LoginFragment.
+         */
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Advertisement, param2: String) =
-            ImagePickerFragment().apply {
+        fun newInstance(param1: String, param2: String) =
+            RegisterFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_PARAM1, param1)
+                    putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun sendToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun getFileExtension(uri: Uri) : String?{
+        val cr = context?.contentResolver
+        val mime: MimeTypeMap = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cr?.getType(uri))
     }
 
     private fun showPictureDialog() {
@@ -146,28 +207,17 @@ class ImagePickerFragment : Fragment() {
                         context?.contentResolver,
                         contentURI
                     )
-                    selectedUploadImage!!.setImageBitmap(bitmap)
-                    uploadImgB.visibility = View.VISIBLE
-                    uploadImgB.setOnClickListener {
-                        imageUri = contentURI
-                        img.imgUri = imageUri!!
-                        nextFragmentNavigation()
-                    }
+                    uploadProfilePicture.setImageBitmap(bitmap)
+                    img.imgUri = contentURI!!
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }
         } else if (requestCode == CAMERA) {
             if (data != null) {
-                val contentUri: Uri? = data.data
                 val thumbnail = data.extras!!["data"] as Bitmap?
-                selectedUploadImage!!.setImageBitmap(thumbnail)
-                uploadImgB.visibility = View.VISIBLE
-                uploadImgB.setOnClickListener {
-                    imageUri = getImageUri(requireContext(), thumbnail!!)
-                    img.imgUri = imageUri!!
-                    nextFragmentNavigation()
-                }
+                uploadProfilePicture.setImageBitmap(thumbnail)
+                img.imgUri = getImageUri(requireContext(), thumbnail!!)
             }
         }
     }
@@ -182,31 +232,6 @@ class ImagePickerFragment : Fragment() {
             null
         )
         return Uri.parse(path)
-    }
-
-    fun nextFragmentNavigation(){
-        if(advert == null) {
-            val imgBundle = Bundle()
-            imgBundle.putBundle("adBundle", bundle)
-            imgBundle.putSerializable("url", img)
-            findNavController().navigate(R.id.action_imagePickerFragment_to_verifyFragment, imgBundle)
-        }
-        else{
-            if(changeSelected){
-                val verifyFragment = VerifyFragment.newInstance(img, advert!!, "yes")
-                activity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.fragment, verifyFragment)
-                        ?.addToBackStack(null)
-                        ?.commit()
-            }
-            else{
-                val verifyFragment = VerifyFragment.newInstance(img, advert!!, "yes")
-                activity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.fragment, verifyFragment)
-                        ?.addToBackStack(null)
-                        ?.commit()
-            }
-        }
     }
 
     private fun requestMultiplePermissions() {
@@ -239,7 +264,5 @@ class ImagePickerFragment : Fragment() {
             .onSameThread()
             .check()
     }
-
-
 
 }

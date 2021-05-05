@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".New_ad_home">
+    tools:context=".view.New_ad_home">
 
     <fragment
         android:id="@+id/fragment2"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="666dp"
+        android:layout_height="@dimen/newAdH"
         android:background="@drawable/gradient_background"
         app:defaultNavHost="true"
         app:navGraph="@navigation/app_navigation" />
