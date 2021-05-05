@@ -1,5 +1,6 @@
 package com.example.adapp.all_ads
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,7 +19,7 @@ import com.example.adapp.model.Advertisement
  */
 class AllAdsRecyclerViewAdapter(
     private val values: List<Advertisement>,
-    val listener: (Advertisement, Int) -> Unit
+    val listener : (Advertisement, Int) -> Unit
 ) : RecyclerView.Adapter<AllAdsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +28,7 @@ class AllAdsRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.adTitle.setText(item.title)
@@ -52,7 +54,7 @@ class AllAdsRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount() : Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val adTitle: TextView = view.findViewById(R.id.TitleTV)

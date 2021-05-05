@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_my_account.*
 class MyAcountDataPresenter(val view:View) {
 
     private val rootRef = FirebaseDatabase.getInstance().reference
-    private val userRef= rootRef.child("Users")
+    private val userRef = rootRef.child("Users")
 
     fun getAccountDetails(callback: FirebaseCallback){
 

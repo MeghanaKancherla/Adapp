@@ -75,21 +75,21 @@ class RegisterFragment : Fragment(),AuthPresenter.View {
             showPictureDialog()
         }
         registerB.setOnClickListener {
-            val username=usernameRegisterET.text.toString()
-            val email=emailRegisterET.text.toString()
-            val password=passwordRegisterET.text.toString()
-            val confirmPassword=rePasswordRegisterET.text.toString()
-            val phoneNo=phoneRegisterET.text.toString()
-            val isMailValid=android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            val username = usernameRegisterET.text.toString()
+            val email = emailRegisterET.text.toString()
+            val password = passwordRegisterET.text.toString()
+            val confirmPassword = rePasswordRegisterET.text.toString()
+            val phoneNo = phoneRegisterET.text.toString()
+            val isMailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
             if(username.isNotEmpty() && email.isNotEmpty()
                 && password.isNotEmpty() && confirmPassword.isNotEmpty()
                 &&phoneNo.isNotEmpty())
             {
-                if(password!=confirmPassword)
+                if(password != confirmPassword)
                 {
                     Toast.makeText(requireActivity(),"Password and confirm Password Doesn't match!",Toast.LENGTH_SHORT).show()
                 }
-                else if(password.length<8)
+                else if(password.length < 8)
                 {
                     passwordRegisterET.setError("Password should have minimum 8 characters")
                 }
@@ -97,7 +97,7 @@ class RegisterFragment : Fragment(),AuthPresenter.View {
                 {
                     emailRegisterET.setError("Enter a valid Email!")
                 }
-                else if(phoneNo.length!=10)
+                else if(phoneNo.length != 10)
                 {
                     phoneRegisterET.setError("Enter a valid Phone Number!")
                 }
