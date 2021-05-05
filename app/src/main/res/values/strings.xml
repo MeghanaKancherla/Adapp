@@ -1,6 +1,6 @@
 <resources>
     //sample text for fragments
-    <string name="app_name">AdApp</string>
+    <string name="app_name">AdzHub</string>
     <string name="allAds">ALL ADS FRAGMENT</string>
     <string name="myAccount">MY   ACCOUNT</string>
     <string name="myAd">My Ad</string>
@@ -33,6 +33,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="brand">Brand:</string>
+    <string name="emailForgot">Enter your email</string>
 
     <string name="username">Enter Username</string>
     <string name="email"> Email</string>
