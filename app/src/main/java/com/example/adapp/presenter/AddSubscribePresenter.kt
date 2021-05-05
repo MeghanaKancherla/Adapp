@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 class AddSubscribePresenter(val view: View) {
 
     var user = FirebaseAuth.getInstance().currentUser
+
     val ref = FirebaseDatabase.getInstance().getReference("Users").child(user.uid)
 
     fun addSubscribe(category: String){

@@ -28,7 +28,8 @@ class Nav_activity : AppCompatActivity() {
 
         //initializing all fragments
 
-
+        /*val allAdsFragment = AllAdsFragment()
+        setCurrentFragment(allAdsFragment)*/
         //click listener to bottom navigation bar items
         bottomNavigationView.setOnNavigationItemSelectedListener {
             val isOnline=isOnline()
