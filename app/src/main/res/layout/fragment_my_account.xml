@@ -89,7 +89,7 @@
                 android:drawablePadding="6dp"
                 android:ems="10"
                 android:inputType="textWebEmailAddress|textPersonName"
-                android:textColor="#0B0A0A"
+                android:textColor="@color/gray"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.506"
