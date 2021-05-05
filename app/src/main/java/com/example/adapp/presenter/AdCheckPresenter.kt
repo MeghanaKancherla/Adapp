@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Build
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -23,16 +24,20 @@ class AdCheckPresenter(val context: Context, params: WorkerParameters) : Worker(
     var user = FirebaseAuth.getInstance().currentUser
 
     fun checkUserCategory() {
-        var userId = user.uid
-        FirebaseDatabase.getInstance().getReference("Users").child(userId).child("category").get().addOnCompleteListener {
-            val result = it.result
-            result.let {
-                userCategory = it?.value as String
-                checkAds()
+        if(user != null && isOnline()) {
+            val userId = user.uid
+            FirebaseDatabase.getInstance().getReference("Users").child(userId).child("category").get().addOnCompleteListener {
+                val result = it.result
+                result.let {
+                    userCategory = it?.value as String
+                    checkAds()
+                }
             }
         }
     }
     val database = FirebaseDatabase.getInstance().getReference("Advertisements")
+    val notifyRef = FirebaseDatabase.getInstance().getReference("Notification")
+
     fun checkAds() {
         Log.d("MainActivity", userCategory)
         database.orderByKey().addValueEventListener(object : ValueEventListener {
@@ -50,6 +55,7 @@ class AdCheckPresenter(val context: Context, params: WorkerParameters) : Worker(
                         Log.d("MainActivity", "New user added")
                         if(userCategory == ads.last()?.category) {
                             sendNotification("New ad added")
+                            addNotification(ads.last()!!)
                         }
                     }
                     saveCount(newCount.toInt())
@@ -95,8 +101,18 @@ class AdCheckPresenter(val context: Context, params: WorkerParameters) : Worker(
         nManager.notify(1, myNotification)
     }
 
+    private fun addNotification(ad: Advertisement){
+        notifyRef.child(user.uid).push().setValue(ad)
+    }
+
     override fun doWork(): Result {
         checkUserCategory()
         return Result.success()
+    }
+
+    private fun isOnline(): Boolean {
+        val connectivityManager = context.getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=connectivityManager.activeNetworkInfo
+        return networkInfo?.isConnected==true
     }
 }

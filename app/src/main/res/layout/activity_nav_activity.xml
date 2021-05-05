@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".Nav_activity">
 
 
@@ -11,7 +12,7 @@
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="75dp"
         tools:layout="@layout/fragment_item_all_ads" />
 
@@ -19,8 +20,10 @@
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fabCradleMargin="20dp"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:background="@color/Blue200"
+        android:backgroundTint="@color/blue800"
+        app:fabCradleMargin="10dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -28,6 +31,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
+            app:itemIconTint="@color/dark_blue"
+            app:itemTextColor="@color/dark_blue"
             app:menu="@menu/bottom_nav_menu">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -39,6 +44,7 @@
         android:layout_height="wrap_content"
         android:onClick="addAdvertisement"
         android:src="@drawable/ic_add"
+        app:backgroundTint="@color/goldHoney"
         app:layout_anchor="@id/bottomAppBar">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>

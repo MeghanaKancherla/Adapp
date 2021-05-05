@@ -1,11 +1,18 @@
 package com.example.adapp.view
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.checkSelfPermission
 import com.bumptech.glide.Glide
 import com.example.adapp.R
 import com.example.adapp.model.Advertisement
@@ -38,17 +45,31 @@ class AddDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add_details, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adDetailsTitleT.text = ad?.title
-        adDetailPriceT.text = ad?.price
+        adDetailPriceT.text = "₹ ${ad?.price}"
         adDetailDescT.text = ad?.description
         adDetailLocT.text = ad?.location
+        adDetailContactT.text=ad?.contact
+        adCallContact.setOnClickListener{
+            val callIntent= Intent(Intent.ACTION_DIAL,Uri.parse("tel:${ad?.contact}"))
+            startActivity(callIntent)
+
+
+        }
+        adMessageContact.setOnClickListener{
+            val msgIntent=Intent(Intent.ACTION_SENDTO,Uri.parse("smsto:${ad?.contact}"))
+            startActivity(msgIntent)
+
+        }
 
         if(ad?.imageUrl != null) {
             Glide.with(view.context).load(Uri.parse(ad?.imageUrl)).into(adDetailImg)
         }
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
